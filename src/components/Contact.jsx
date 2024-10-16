@@ -21,6 +21,7 @@ const Contact = () => {
     transition={{duration:1}}
     className="my-4">{CONTACT.phoneNo}</motion.p>
     <a href="#" className="border-b"> {CONTACT.email}</a>
+   <p className="mt-4"><a href="#" className=" border-b "> {CONTACT.Linkedin}</a></p> 
     </div> 
   </div>
   )
