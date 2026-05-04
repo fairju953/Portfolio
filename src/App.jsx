@@ -1,31 +1,54 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Navbar from './components/Navbar'
-import Hero from './components/Hero';
-import About from './components/About';
-import Technologies from './components/Technologies';
-import Experience from './components/Experience';
-import Projects from './components/Projects';
-import Contact from './components/Contact';
-import ChatGPTComponent from './components/ChatGPTComponent';
+// Layout components
+import Navbar from "./components/Navbar";
+
+// Sections (Home)
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Technologies from "./components/Technologies";
+import Experience from "./components/Experience";
+import Projects from "./components/Projects";
+import Contact from "./components/Contact";
+import Blog from "./blog/Blog";
+import BlogPost from "./blog/BlogPost";
+
+
+
+const Home = () => (
+  <>
+    <Hero />
+    <About />
+    <Technologies />
+    <Experience />
+    <Projects />
+    <Contact />
+  </>
+);
 
 const App = () => {
   return (
-    <div className='overflow-x-hidden text neutral-300 antialiased selection:text-cyan-900'>
-      <div className= "fixed top-0 -z-10 h-full w-full"> <div className="relative h-full w-full bg-neutral-900"><div className="absolute inset-0 bg-fuchsia-400 bg-[size:20px_20px] opacity-20 blur-[100px]"></div></div>
-<div className="container mx-auto px-8"></div>
-</div>
-  <Navbar />
-  <Hero />
-  <About />
-  <Technologies />
-  <Experience />
-  <Projects />
-  <ChatGPTComponent />
-  <Contact />
+    <BrowserRouter>
+      {/* SAFETY FALLBACK (INLINE STYLE — MUST SHOW) */}
+   
 
-    </div>
-  )
-}
+      {/* Background */}
+      <div className="fixed inset-0 -z-10 bg-neutral-900">
+        <div className="absolute inset-0 bg-fuchsia-400 opacity-20 blur-[120px]" />
+      </div>
 
-export default App
+      {/* App Content */}
+      <div className="relative container mx-auto px-8 py-10 text-neutral-300">
+        <Navbar />
 
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
+};
+
+export default App;
