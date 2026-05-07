@@ -27,10 +27,10 @@ const Navbar = () => {
 
       {/* Social icons */}
       <div className="m-8 flex items-center justify-center gap-4 text-2xl text-white">
-        <a href="https://linkedin.com" target="_blank" rel="noreferrer">
+        <a href="https://linkedin.com/in/justin-fair-503b56b4" target="_blank" rel="noreferrer">
           <FaLinkedin />
         </a>
-        <a href="https://github.com" target="_blank" rel="noreferrer">
+        <a href="https://github.com/fairju953" target="_blank" rel="noreferrer">
           <FaGithub />
         </a>
         <a href="https://instagram.com" target="_blank" rel="noreferrer">

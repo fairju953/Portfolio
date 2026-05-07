@@ -10,8 +10,17 @@ I have experience working with technologies such as React, Node.js, MySQL, Java,
 export const ABOUT_TEXT = `I am a motivated and adaptable IT professional with a passion for supporting users, troubleshooting systems, and ensuring smooth technology operations. With hands-on experience in technologies such as React, Tailwind CSS, Node.js, MySQL, Java, and PHP, I can quickly diagnose issues, understand application workflows, and communicate effectively with technical teams. My journey into IT began with a curiosity for technology and has evolved into a career focused on reliability, problem-solving, and continuous learning. I thrive in collaborative environments and take pride in resolving complex technical challenges. Beyond IT, I enjoy staying active, exploring emerging technologies, and contributing to knowledge-sharing initiatives.`;
 
 export const EXPERIENCES = [
+   {
+    year: "2026 - present",
+    role: "Worker's Compensation Adjuster",
+    company: "Gallagher Basset",
+    description: `Conduct detailed investigations and analyze documentation to evaluate Workers Compensation claims across New Jersey and Pennsylvania jurisdictions.
+Review medical records, evidence, and regulatory requirements to assess claim validity, determine benefits eligibility, and ensure compliance with state laws and internal procedures.
+Manage complex claim workflows by coordinating with multiple stakeholders, negotiating resolutions, and maintaining accurate documentation and reporting..`,
+    technologies: ["Miscrosoft Office suite", "Claims Processing Software", "DMS"],
+  },
   {
-    year: "2020 - Present",
+    year: "2020 - 2026",
     role: "Worker's Compensation Adjuster",
     company: "NJPLIGA",
     description: `Evaluate and process WC claims, with investigation, evidence gathering and review of medical records to determine claim validity. 
