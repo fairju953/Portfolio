@@ -40,9 +40,12 @@ const BlogPost = () => {
         <hr className="border-neutral-800 mb-8" />
 
         {/* Content */}
-        <ReactMarkdown className="leading-relaxed">
-          {post.content}
-        </ReactMarkdown>
+        <div className="leading-relaxed">
+          <ReactMarkdown>
+            {post.content}
+          </ReactMarkdown>
+        </div>
+
       </article>
     </div>
   );

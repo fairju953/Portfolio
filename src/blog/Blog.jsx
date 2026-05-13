@@ -2,12 +2,16 @@ import { Link } from "react-router-dom";
 import { posts } from "./posts";
 
 const Blog = () => {
+  const sortedPosts = [...posts].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+
   return (
     <div className="text-white">
       <h1 className="text-4xl font-bold mb-8">Blog</h1>
 
       <ul className="space-y-6">
-        {posts.map((post) => (
+        {sortedPosts.map((post) => (
           <li key={post.slug}>
             <Link
               to={`/blog/${post.slug}`}
