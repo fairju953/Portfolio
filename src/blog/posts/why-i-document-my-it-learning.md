@@ -32,10 +32,11 @@ Here, I was able to review the password requirements that were being enforced.
 
 ## Resolution
 
-I discovered that the minimum password length was set higher than expected, which caused the error during user creation.
+After reviewing the password policy, I discovered that the minimum password length was set to 14 characters.
 
-After identifying the issue, I adjusted my password to meet the requirements and successfully created the user account.
+Instead of lowering the requirement, I decided to keep the policy unchanged to maintain a more realistic security standard within my lab.
 
+To resolve the issue, I updated the password I was using to meet the domain’s complexity and length requirements. Once I used a compliant password, I was able to successfully create the user account.
 ## What I Learned
 
 This experience reinforced a few important concepts:
