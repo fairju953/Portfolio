@@ -170,7 +170,18 @@ Required actions, in order:
 - **ESLint fails.** `npm run lint` exits 1 with two errors: `no-useless-escape` at `src/blog/posts.js` line 23, and an unused `React` import at `src/components/ChatGPTComponent.jsx` line 3.
 - **Deprecated Vite API.** `src/blog/posts.js` line 3 uses `{ as: "raw" }`, deprecated since Vite 5.1. It still works in Vite 7 but logs a warning on every build. The modern form is `{ query: "?raw", import: "default", eager: true }`.
 
-### 3.3 Deployment and Hosting
+### 3.3 Deployment and Hosting - RESOLVED 2026-09-01
+
+**Status: closed and verified live.** [vercel.json](vercel.json) supplies the SPA rewrite, and [.github/workflows/ci.yml](.github/workflows/ci.yml) now runs `npm ci`, `npm run lint`, and `npm run build` on every push and pull request against `main`.
+
+Verified against production after deploy: `jbtechbyte.com` issues a 308 to the `www` host, and `www.jbtechbyte.com/blog/hunting-in-wazuh-first-investigations` returns HTTP 200 serving the app shell rather than a 404. The stylesheet hash served in production matches the local build, confirming the deploy includes the section 3.2 fixes.
+
+Two follow-ups this surfaced:
+
+- **Unknown URLs now return HTTP 200, not 404.** This is inherent to a catch-all SPA rewrite: the server hands back `index.html` and React renders the 404 view client-side. Search engines classify that as a soft 404. Prerendering or a hosting-level status override would be needed to return a true 404 status, which ties into the section 3.4 rendering work.
+- **CI overlaps Vercel only partially.** Vercel already builds on push, so the unique value here is the lint step and having a required check on pull requests. Note the workflow pins Node 24 to match the local toolchain, while Vercel picks its own version; adding an `engines.node` field to `package.json` would make both read from one source, but that would change the production build's Node version and was left alone deliberately.
+
+The original finding follows.
 
 There is no deployment configuration anywhere in the repository - no `vercel.json`, `netlify.toml`, `public/_redirects`, `Dockerfile`, nginx config, `CNAME`, or `.github/workflows`.
 
@@ -275,7 +286,7 @@ This is where the site loses the most opportunity, and none of it requires new e
 23. Pin `framer-motion` to a stable release, add `viewport={{ once: true }}` to scroll animations, and respect `prefers-reduced-motion`.
 24. Code-split the blog routes with `React.lazy` and add an error boundary.
 25. Extract shared animation variants, make Technologies data-driven, add Prettier plus a `format` script, and rewrite the README to describe this project (with `.nvmrc` or an `engines` field).
-26. Add a GitHub Actions workflow running `npm ci`, `npm run lint`, and `npm run build` on every push, wired to automatic deploys.
+26. DONE - Add a GitHub Actions workflow running `npm ci`, `npm run lint`, and `npm run build` on every push, wired to automatic deploys.
 27. Blog enhancements: tag filter pages, list excerpts, reading time, an RSS feed, and previous/next post navigation.
 28. Consider audit-driven verification: Lighthouse for performance and SEO, axe DevTools for accessibility, and a manual keyboard-only pass.
 
