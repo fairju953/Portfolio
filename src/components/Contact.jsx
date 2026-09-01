@@ -2,7 +2,7 @@ import {CONTACT} from "../constants"
 import {motion} from "framer-motion"
 
 const Contact = () => {
-  return ( <div className=" text-white border-b border-neutral-900 pb=20"> 
+  return ( <div className=" text-white border-b border-neutral-900 pb-20"> 
   <motion.h2 
       whileInView={{opacity:1, y:0}}
       initial={{opacity:0, y: -100}}
@@ -19,9 +19,20 @@ const Contact = () => {
     whileInView={{opacity:1, x:0}}
     initial={{opacity:0, x: 100}}
     transition={{duration:1}}
-    className="my-4">{CONTACT.phoneNo}</motion.p>
-    <a href="#" className="border-b"> {CONTACT.email}</a>
-   <p className="mt-4"><a href="#" className=" border-b "> {CONTACT.Linkedin}</a></p> 
+    className="my-4">
+      <a href={`tel:${CONTACT.phoneNo.replace(/[^\d+]/g, "")}`} className="border-b hover:text-cyan-400 transition">{CONTACT.phoneNo.trim()}</a>
+    </motion.p>
+    <a href={`mailto:${CONTACT.email}`} className="border-b hover:text-cyan-400 transition">{CONTACT.email}</a>
+   <p className="mt-4">
+     <a
+       href={`https://${CONTACT.Linkedin.replace(/^https?:\/\//, "")}`}
+       target="_blank"
+       rel="noreferrer"
+       className="border-b hover:text-cyan-400 transition"
+     >
+       {CONTACT.Linkedin}
+     </a>
+   </p> 
     </div> 
   </div>
   )

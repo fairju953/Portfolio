@@ -42,7 +42,7 @@ One of the most useful commands was:
 
 ```bash
 sudo apache2ctl -S
-````
+```
 
 The major breakthrough came when I checked which services were using port 80:
 
@@ -88,6 +88,3 @@ Most importantly, I learned how important it is to troubleshoot methodically ins
 Although this issue took longer than expected to solve, I learned much more from troubleshooting the problem than I would have from a perfect installation on the first try.
 
 I’m continuing to build out my homelab with Active Directory, Linux systems, osTicket, and future SOC monitoring tools while documenting everything I learn along the way.
-
-```
-```

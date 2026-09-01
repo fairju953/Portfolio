@@ -11,7 +11,7 @@ const container = (delay) => (
 
 const Hero = () => {
   return (
-    <div className="border-b border-neutral-900 pb-4 lg:mg-35">
+    <div className="border-b border-neutral-900 pb-4">
       <div className="flex flex-wrap items-center">
         {/* Left side - Text content */}
         <div className="w-full lg:w-1/2 flex flex-col items-start lg:pr-8">
@@ -19,7 +19,7 @@ const Hero = () => {
           variants={container(0)}
           initial="hidden"
           animate="visible"
-          className="text-white pb-5 text-6xl font-thin tracking-tight lg:mt-15 lg:text-8xl px-7">
+          className="text-white pb-5 text-6xl font-thin tracking-tight lg:mt-16 lg:text-8xl px-7">
             Justin Fair
           </motion.h1>
           <motion.span 

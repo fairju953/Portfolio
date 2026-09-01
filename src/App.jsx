@@ -10,6 +10,7 @@ import Technologies from "./components/Technologies";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
+import NotFound from "./components/NotFound";
 import Blog from "./blog/Blog";
 import BlogPost from "./blog/BlogPost";
 
@@ -45,6 +46,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </BrowserRouter>
