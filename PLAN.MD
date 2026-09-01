@@ -115,7 +115,7 @@ Both the email and LinkedIn entries are rendered as `<a href="#">`, so neither i
 
 The blog list sorts posts by date descending and shows title plus date. Individual posts render title, date, tag chips, a divider, and markdown body. Six posts exist:
 
-- 2026-09-01 - "Hunting in Wazuh: my first SOC investigations" - the strongest post on the site. Practicing an analyst workflow instead of installing tools: custom Wazuh rules 100110 and 100111 for PowerShell `-ExecutionPolicy Bypass` and encoded commands, wiring level-12-and-above alerts to auto-open osTicket tickets, triaging rule 92213 as a false positive by reading `targetFilename` rather than the rule description, distinguishing four Windows 4625 failed logons by status code (`0xC0000133` clock skew vs. `0xC000006D` bad password), enabling Other Object Access Events auditing to surface 4698 scheduled tasks, and a true positive / false positive / benign true positive triage framework. Note: this file is currently untracked in git and has not been committed
+- 2026-09-01 - "Hunting in Wazuh: my first SOC investigations" - the strongest post on the site. Practicing an analyst workflow instead of installing tools: custom Wazuh rules 100110 and 100111 for PowerShell `-ExecutionPolicy Bypass` and encoded commands, wiring level-12-and-above alerts to auto-open osTicket tickets, triaging rule 92213 as a false positive by reading `targetFilename` rather than the rule description, distinguishing four Windows 4625 failed logons by status code (`0xC0000133` clock skew vs. `0xC000006D` bad password), enabling Other Object Access Events auditing to surface 4698 scheduled tasks, and a true positive / false positive / benign true positive triage framework. Published 2026-09-01
 - 2026-08-11 - "Nextcloud and jbtechbyte.com" - Nextcloud with MariaDB and Redis, `.env` credentials, Docker Compose organization, health checks, external storage, automated cron backups, and the purchase of the jbtechbyte.com domain
 - 2026-06-08 - "Adding Wazuh and strengthening osTicket" - Wazuh on Ubuntu Server moved to dedicated hardware, agents on Windows Server 2022 DC and Windows 11 client, Sysmon integration, osTicket on Raspberry Pi, plans for detection rules and a Kali VM
 - 2026-05-12 - "Troubleshooting osTicket on my Raspberry Pi Homelab" - Apache/PHP/MariaDB install, 404 and access-denied errors traced to a Pi-hole port 80 conflict with Apache on 8080, resolved via `apache2ctl -S` and `ss -tulpn`
@@ -222,7 +222,7 @@ This is where the site loses the most opportunity, and none of it requires new e
 - **No footer.** No copyright line, no secondary navigation, no "last updated" signal.
 - **Typos in visible content:** "Miscrosoft Office suite" and "Gallagher Basset" (the company is Gallagher Bassett) in `src/constants/index.js`, "everaging" in the Java project description, and in the blog posts "acheivements", "conecepts", "looiing", "goasl", "Specialst", "sever" (for "serve"), and "advantures". For someone whose target roles emphasize documentation quality, these are worth a pass.
 - **Blog features that the data already supports but the UI does not use:** tags are parsed and displayed on posts but are not filterable or linked; there are no post excerpts on the list page, no reading time, no post images, no RSS feed, and no pagination (not yet needed at five posts, but the list will get unwieldy).
-- **Publishing cadence is uneven, and the newest work is not live.** Posts cluster in May, then gap to June, August, and September. More pressing: the September post is written but untracked in git, so it is not committed or deployed - the best piece of evidence on the site is currently invisible to visitors.
+- **Publishing cadence is uneven.** Posts cluster in May, then gap to June, August, and September. Cadence matters more than volume for a learning journal, and the gaps are the main thing a reader tracking your progress would notice.
 
 ### 3.8 Code Quality and Maintainability
 
@@ -256,7 +256,7 @@ This is where the site loses the most opportunity, and none of it requires new e
 10. DONE - Fix the two ESLint errors and get `npm run lint` to exit 0.
 11. DONE - Harden the frontmatter parser in `src/blog/posts.js`, pass `remarkPlugins={[remarkGfm]}` to `ReactMarkdown`, and migrate `{ as: "raw" }` to `{ query: "?raw", import: "default" }`. See the note in section 3.2 on why `gray-matter` was dropped rather than adopted.
 12. PARTIAL - The malformed delimiters in `HomeLab_update.md` and the stray fences in `Troubleshooting_osTicket.md` are fixed. Proofreading the six posts and the constants file for the spelling errors listed in section 3.7 is still outstanding.
-13. Commit and deploy `hunting-in-wazuh-first-investigations.md`. It is the most compelling content on the site and it is not currently published.
+13. DONE - Commit and deploy `hunting-in-wazuh-first-investigations.md`. It is the most compelling content on the site.
 
 ### Priority 2 - Discoverability and impact (one day)
 
@@ -287,4 +287,4 @@ The site is a working, cleanly animated React portfolio with a functional file-b
 
 The gap is that the front page does not reflect what the blog proves. It advertises a web-developer stack the author is not targeting, lists coursework projects instead of the home lab, hides the degree and Security+ certification inside a post from May, and closes with placeholder contact details.
 
-Four things matter most, in order: revoke the leaked Hugging Face token (done), add the SPA rewrite rule so shared blog links actually open, commit and publish the September Wazuh investigation post, and realign the Technologies, Projects, and Education sections with the SOC analyst goal. Everything else in this document is refinement on top of those.
+Four things mattered most: revoke the leaked Hugging Face token, add the SPA rewrite rule so shared blog links actually open, publish the September Wazuh investigation post, and realign the Technologies, Projects, and Education sections with the SOC analyst goal. The first three are done. The fourth - making the front page reflect what the blog proves - is now the highest-value work remaining, and it is content, not engineering.
