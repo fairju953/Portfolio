@@ -1,6 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useSeo } from "../seo/useSeo";
+import { SITE_NAME } from "../seo/siteMeta";
 
 const NotFound = () => {
+  const { pathname } = useLocation();
+
+  // The SPA rewrite means the server answers 200 for unknown URLs, so this is
+  // the only signal available to keep them out of the index.
+  useSeo({
+    title: `Page not found | ${SITE_NAME}`,
+    description: "That page does not exist or may have been moved.",
+    path: pathname,
+    index: false,
+  });
+
   return (
     <div className="flex flex-col items-center justify-center py-32 text-center text-white">
       <p className="text-6xl font-thin tracking-tight lg:text-8xl">404</p>

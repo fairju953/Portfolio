@@ -1,10 +1,19 @@
 import { Link } from "react-router-dom";
 import { posts } from "./posts";
+import { useSeo } from "../seo/useSeo";
+import { SITE_NAME } from "../seo/siteMeta";
 
 const Blog = () => {
   const sortedPosts = [...posts].sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
+
+  useSeo({
+    title: `Blog | ${SITE_NAME}`,
+    description:
+      "Write-ups from my home lab: Active Directory, Wazuh detection rules, Sysmon telemetry, osTicket, and the troubleshooting behind each of them.",
+    path: "/blog",
+  });
 
   return (
     <div className="text-white">

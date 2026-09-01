@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="glow" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d946ef" stop-opacity="0.85" />
+      <stop offset="55%" stop-color="#171717" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#171717" />
+  <rect width="64" height="64" rx="14" fill="url(#glow)" />
+  <text
+    x="32"
+    y="33"
+    fill="#ffffff"
+    font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+    font-size="30"
+    font-weight="700"
+    letter-spacing="-1"
+    text-anchor="middle"
+    dominant-baseline="central"
+  >JF</text>
+</svg>

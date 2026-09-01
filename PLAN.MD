@@ -189,7 +189,25 @@ This matters specifically because the app uses `BrowserRouter`. On any static ho
 
 There is also no CI: no automated lint or build check on push, so the two existing lint errors went unnoticed.
 
-### 3.4 SEO and Metadata
+### 3.4 SEO and Metadata - RESOLVED 2026-09-01 (static scope)
+
+**Status: static and client-side work complete; prerendering deliberately deferred.**
+
+What is in place:
+
+- [index.html](index.html) now carries a descriptive title, meta description, canonical URL, author, theme colour, full Open Graph and Twitter Card tags, font preconnects, and `Person` JSON-LD.
+- A generated social card at `public/og-card.png` (1536x1024), and an `JF` monogram favicon at `public/favicon.svg` replacing the Vite default, which has been deleted.
+- `public/robots.txt` pointing at the sitemap.
+- `sitemap.xml` is generated at build time by a plugin in [vite.config.js](vite.config.js), so new posts are listed automatically rather than depending on someone editing a static file. It currently emits eight URLs with per-post `lastmod` dates.
+- Per-route titles, descriptions, canonicals, and JSON-LD via [src/seo/useSeo.js](src/seo/useSeo.js), applied to the home, blog, post, and 404 routes. Post descriptions are generated from the body text by [src/seo/excerpt.js](src/seo/excerpt.js) rather than repeating the site description; output was checked against all six posts for length and markdown leakage.
+- The 404 route sets `noindex`, which is the only available defence against the soft-404 problem described in section 3.3.
+
+Two limitations to be aware of:
+
+- **Per-post link previews still show the site-level card.** LinkedIn, X, and Facebook do not execute JavaScript, so they only ever read the static tags in `index.html`. Sharing an individual post shows the generic preview, not the post's own title. Fixing this properly requires prerendering, which was scoped out.
+- **The page still serves an empty `<div id="root">`.** Google executes JavaScript and will index the content, but other crawlers and AI scrapers may not.
+
+The frontmatter parser was extracted to [src/blog/frontmatter.js](src/blog/frontmatter.js) so the client loader and the build-time sitemap generator share one implementation. The original finding follows.
 
 `index.html` is essentially untouched from the Vite template:
 
@@ -271,8 +289,8 @@ This is where the site loses the most opportunity, and none of it requires new e
 
 ### Priority 2 - Discoverability and impact (one day)
 
-14. Rewrite `index.html`: descriptive title, meta description, real favicon, Open Graph and Twitter Card tags with a preview image, canonical URL. Add `robots.txt` and `sitemap.xml` in `public/`.
-15. Add per-route document titles and meta descriptions (a small `useEffect` hook or `react-helmet-async`), plus `BlogPosting` and `Person` JSON-LD.
+14. DONE - Rewrite `index.html`: descriptive title, meta description, real favicon, Open Graph and Twitter Card tags with a preview image, canonical URL. Add `robots.txt`, and generate `sitemap.xml` at build time.
+15. DONE - Add per-route document titles and meta descriptions (implemented as a small `useSeo` hook rather than `react-helmet-async`), plus `BlogPosting` and `Person` JSON-LD.
 16. Replace the Technologies section content with the actual home lab stack (Active Directory, Windows Server, Wazuh, Sysmon, Docker, Linux, osTicket, Nextcloud, networking), ideally grouped by category and driven from `constants/index.js` rather than hardcoded JSX.
 17. Rebuild the Projects section around the home lab: the AD domain lab, the Wazuh SIEM deployment with Sysmon telemetry and custom detection rules, the osTicket help desk on Raspberry Pi with automated alert-to-ticket integration, and the Nextcloud stack with automated backups - each with outcome-focused copy, real screenshots or an architecture diagram, and a link to the matching blog post.
 18. Add an Education and Certifications section (Kean University BS in IT; CompTIA Security+, April 2026) and a resume PDF download in the Hero and Contact areas.

@@ -2,10 +2,38 @@ import { Link, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { posts } from "./posts";
+import { useSeo } from "../seo/useSeo";
+import { toExcerpt } from "../seo/excerpt";
+import { OG_IMAGE, SITE_NAME, SITE_URL } from "../seo/siteMeta";
 
 const BlogPost = () => {
   const { slug } = useParams();
   const post = posts.find((p) => p.slug === slug);
+
+  const description = post ? toExcerpt(post.content) : "";
+  const path = `/blog/${slug}`;
+
+  useSeo({
+    title: post ? `${post.title} | ${SITE_NAME}` : `Post not found | ${SITE_NAME}`,
+    description: post ? description : "That post does not exist.",
+    path,
+    type: "article",
+    index: Boolean(post),
+    jsonLd: post
+      ? {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description,
+          datePublished: post.date,
+          dateModified: post.date,
+          keywords: post.tags?.join(", "),
+          image: OG_IMAGE,
+          author: { "@type": "Person", name: SITE_NAME, url: SITE_URL },
+          mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}${path}` },
+        }
+      : null,
+  });
 
   if (!post) {
     return (

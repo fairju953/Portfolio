@@ -13,19 +13,25 @@ import Contact from "./components/Contact";
 import NotFound from "./components/NotFound";
 import Blog from "./blog/Blog";
 import BlogPost from "./blog/BlogPost";
+import { useSeo } from "./seo/useSeo";
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from "./seo/siteMeta";
 
 
+// The Person JSON-LD for this route is served statically from index.html.
+const Home = () => {
+  useSeo({ title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION, path: "/" });
 
-const Home = () => (
-  <>
-    <Hero />
-    <About />
-    <Technologies />
-    <Experience />
-    <Projects />
-    <Contact />
-  </>
-);
+  return (
+    <>
+      <Hero />
+      <About />
+      <Technologies />
+      <Experience />
+      <Projects />
+      <Contact />
+    </>
+  );
+};
 
 const App = () => {
   return (
