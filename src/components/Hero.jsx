@@ -1,5 +1,5 @@
 import { HERO_CONTENT } from "../constants";
-import profilePic from "../assets/pic.jpg";
+import profilePic from "../assets/pic.webp";
 import {motion} from "framer-motion";
 
 const container = (delay) => (
@@ -47,6 +47,9 @@ const Hero = () => {
     className="rounded-full max-w-xs lg:max-w-md px-3 lg:ml-20"
     src={profilePic}
     alt="Justin Fair"
+    width={300}
+    height={472}
+    fetchPriority="high"
   />
 </div>
 

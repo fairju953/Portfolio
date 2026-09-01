@@ -1,4 +1,4 @@
-import aboutImg from "../assets/pic2.png";
+import aboutImg from "../assets/pic2.webp";
 import { ABOUT_TEXT } from "../constants";
 import { motion } from "framer-motion";
 
@@ -20,6 +20,10 @@ const About = () => {
           className="rounded-2xl"
           src={aboutImg}
           alt="Justin Fair working at his home desk, typing on a laptop with code on screen alongside two external monitors."
+          width={500}
+          height={491}
+          loading="lazy"
+          decoding="async"
         />
       </div>
     

@@ -247,7 +247,19 @@ Not verified: no browser-based audit (axe, Lighthouse) or manual keyboard pass w
 - **Contrast risks** on dark backgrounds: `text-neutral-400` body copy in Experience and Projects descriptions, and especially `text-blue-800` project tags on `bg-neutral-900`, are likely below the WCAG AA 4.5:1 threshold.
 - **Focus visibility** is left to browser defaults against a dark theme with a fuchsia blur backdrop.
 
-### 3.6 Performance
+### 3.6 Performance - RESOLVED 2026-09-01
+
+**Status: fixed.** Measured before and after, from the build output:
+
+- **Images: 857 KB to 115 KB, an 87 percent reduction.** The diagnosis in the original finding was slightly off. `pic2.png` was not oversized in dimensions at all, it is only 500x491; it was a photograph saved as PNG, which is why it weighed 473 KB. As WebP it is 34 KB, a 93 percent drop on that one file. The project thumbnails were 500x500 sources rendered at 150x150, so they were resampled to 300x300 for high-density screens and now total 38 KB instead of 285 KB. Originals are kept in `src/assets` as sources; only the `.webp` files are imported and shipped. Regenerate with [scripts/optimize-images.mjs](scripts/optimize-images.mjs), which documents the one-line `sharp` install it needs. `sharp` is deliberately not a project dependency, so CI installs stay fast.
+- **Initial JavaScript: 500 KB to 340 KB (163 KB to 114 KB gzipped).** `Blog` and `BlogPost` are now `React.lazy` routes behind a `Suspense` boundary, so the 159 KB markdown renderer and the post bodies only load when someone opens the blog. This also cleared Vite's oversized-chunk warning.
+- **Fonts no longer block behind the stylesheet.** The Google Fonts `@import` at the top of `src/index.css` was serialising the font request behind the CSS download; it is now a `<link>` in `index.html` after the existing preconnects.
+- **Layout shift.** Every image now carries explicit `width` and `height`. The hero portrait is `fetchPriority="high"`; the About photo and project thumbnails are `loading="lazy"` with `decoding="async"`.
+- **framer-motion is off the prerelease**, moving from `12.0.0-alpha.0` to `12.43.0`. This stays inside major 12 deliberately: 13.1.1 is available, but a major bump to an animation library could not be visually verified here. The upgrade costs about 5 KB gzipped.
+
+Net effect on a first visit to the home page: roughly 1,025 KB of JavaScript and images before, roughly 160 KB now, with the rest deferred until scroll.
+
+Not verified: no Lighthouse run or real-device timing, and the animations were not visually checked after the framer-motion upgrade. The original finding follows.
 
 - `src/assets/pic2.png` is a 473 KB PNG used as a photographic image. Converting to WebP or AVIF at an appropriate display size would plausibly cut it by 90 percent.
 - No image has `width`/`height` attributes or `loading="lazy"`, so layout shifts during load and all six images (837 KB total) are fetched eagerly.
@@ -316,10 +328,10 @@ This is where the site loses the most opportunity, and none of it requires new e
 
 ### Priority 3 - Polish and infrastructure
 
-21. Compress and convert images to WebP/AVIF, add explicit dimensions and `loading="lazy"`, and generate responsive `srcset`.
-22. Move the font from CSS `@import` to a preconnected `<link>` or self-host the Inter subset.
-23. Pin `framer-motion` to a stable release, add `viewport={{ once: true }}` to scroll animations, and respect `prefers-reduced-motion`.
-24. Code-split the blog routes with `React.lazy` and add an error boundary.
+21. DONE - Compress and convert images to WebP, add explicit dimensions and `loading="lazy"`. Responsive `srcset` was not added; at these display sizes a single well-sized WebP is enough.
+22. DONE - Move the font from CSS `@import` to a preconnected `<link>`.
+23. DONE - Pin `framer-motion` to a stable release, add `viewport={{ once: true }}` to scroll animations, and respect `prefers-reduced-motion`.
+24. PARTIAL - The blog routes are code-split with `React.lazy`. An error boundary was not added, so a throw in any section still blanks the page.
 25. Extract shared animation variants, make Technologies data-driven, add Prettier plus a `format` script, and rewrite the README to describe this project (with `.nvmrc` or an `engines` field).
 26. DONE - Add a GitHub Actions workflow running `npm ci`, `npm run lint`, and `npm run build` on every push, wired to automatic deploys.
 27. Blog enhancements: tag filter pages, list excerpts, reading time, an RSS feed, and previous/next post navigation.

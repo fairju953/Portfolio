@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { MotionConfig } from "framer-motion";
 
@@ -13,10 +14,13 @@ import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import NotFound from "./components/NotFound";
-import Blog from "./blog/Blog";
-import BlogPost from "./blog/BlogPost";
 import { useSeo } from "./seo/useSeo";
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from "./seo/siteMeta";
+
+// Split out so the markdown renderer and every post body stay out of the
+// initial bundle for visitors who only ever look at the home page.
+const Blog = lazy(() => import("./blog/Blog"));
+const BlogPost = lazy(() => import("./blog/BlogPost"));
 
 
 // The Person JSON-LD for this route is served statically from index.html.
@@ -57,12 +61,20 @@ const App = () => {
           <Navbar />
 
           <main id="main">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <Suspense
+              fallback={
+                <p className="py-20 text-center text-neutral-400" role="status">
+                  Loading...
+                </p>
+              }
+            >
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
           </main>
 
           <Footer />
