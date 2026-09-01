@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { MotionConfig } from "framer-motion";
 
 // Layout components
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 // Sections (Home)
 import Hero from "./components/Hero";
@@ -36,25 +38,36 @@ const Home = () => {
 const App = () => {
   return (
     <BrowserRouter>
-      {/* SAFETY FALLBACK (INLINE STYLE — MUST SHOW) */}
-   
+      {/* "user" defers to the prefers-reduced-motion setting. */}
+      <MotionConfig reducedMotion="user">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-neutral-800 focus:px-4 focus:py-2 focus:text-white"
+        >
+          Skip to main content
+        </a>
 
-      {/* Background */}
-      <div className="fixed inset-0 -z-10 bg-neutral-900">
-        <div className="absolute inset-0 bg-fuchsia-400 opacity-20 blur-[120px]" />
-      </div>
+        {/* Background */}
+        <div className="fixed inset-0 -z-10 bg-neutral-900">
+          <div className="absolute inset-0 bg-fuchsia-400 opacity-20 blur-[120px]" />
+        </div>
 
-      {/* App Content */}
-      <div className="relative container mx-auto px-8 py-10 text-neutral-300">
-        <Navbar />
+        {/* App Content */}
+        <div className="relative container mx-auto px-8 py-10 text-neutral-300">
+          <Navbar />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
+          <main id="main">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+
+          <Footer />
+        </div>
+      </MotionConfig>
     </BrowserRouter>
   );
 };

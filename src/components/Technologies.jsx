@@ -20,73 +20,44 @@ const iconVariants = (duration) => ({
 
 })
 
+// Each icon carries a label so the section is not silent to a screen reader.
+const TECHNOLOGIES = [
+  { label: "React", Icon: RiReactjsLine, color: "text-cyan-400", duration: 2.5 },
+  { label: "Next.js", Icon: TbBrandNextjs, color: "text-white", duration: 3 },
+  { label: "MongoDB", Icon: SiMongodb, color: "text-green-500", duration: 5 },
+  { label: "Redis", Icon: DiRedis, color: "text-red-700", duration: 2 },
+  { label: "Node.js", Icon: FaNodeJs, color: "text-green-500", duration: 7 },
+  { label: "PostgreSQL", Icon: BiLogoPostgresql, color: "text-sky-700", duration: 5.5 },
+];
+
 const Technologies = () => {
   return (  <div className="border-b border-neutral-800 pb-24"> 
   <motion.h2 
   whileInView={{opacity: 1, y: 0}}
   initial={{opacity: 0, y:-100}}
   transition={{duration:1.5}}
+  viewport={{ once: true }}
   className="text-white my-20 text-center text-4xl">Technologies</motion.h2>
-  <motion.div
+  <motion.ul
   whileInView={{opacity:1, x:0}}
   initial={{opacity: 0, x: -100}}
   transition={{duration: 1.5}}
+  viewport={{ once: true }}
   className="flex flex-wrap items-center justify-center gap-4">
-    <motion.div 
-    variants={iconVariants(2.5)}
-    initial="initial"
-    animate="animate"
-
-    className="rounded-2xl border-4 border-neutral-800 p-4">
-    <RiReactjsLine className="text-7xl text-cyan-400"/>
-    </motion.div>
-    <motion.div 
-     variants={iconVariants(3)}
-     initial="initial"
-     animate="animate"
-    className="rounded-2xl border-4 border-neutral-800 p-4">
-    <TbBrandNextjs className="text-7xl text-white"/>
-    </motion.div>
-    <motion.div 
-    variants={iconVariants(5)}
-    initial="initial"
-    animate="animate"
-    className="rounded-2xl border-4 border-neutral-800 p-4">
-    <SiMongodb className="text-7xl text-green-500"/>
-    </motion.div>
-    <motion.div 
-    variants={iconVariants(2)}
-    initial="initial"
-    animate="animate"
-    className="rounded-2xl border-4 border-neutral-800 p-4">
-    <DiRedis className="text-7xl text-red-700"/>
-    </motion.div>
-    <motion.div 
-    variants={iconVariants(7)}
-    initial="initial"
-    animate="animate"
-    className="rounded-2xl border-4 border-neutral-800 p-4">
-    <FaNodeJs className="text-7xl text-green-500"/>
-    </motion.div>
-    <motion.div
-       variants={iconVariants(5.5)}
-       initial="initial"
-       animate="animate"
-    className="rounded-2xl border-4 border-neutral-800 p-4">
-    <BiLogoPostgresql className="text-7xl text-sky-700"/>
-    </motion.div>
-  </motion.div>
+    {TECHNOLOGIES.map(({ label, Icon, color, duration }) => (
+      <motion.li
+        key={label}
+        variants={iconVariants(duration)}
+        initial="initial"
+        animate="animate"
+        className="rounded-2xl border-4 border-neutral-800 p-4"
+      >
+        <Icon className={`text-7xl ${color}`} title={label} role="img" />
+      </motion.li>
+    ))}
+  </motion.ul>
   </div>
   )
 }
 
-
-
-
-
-
-
-
-
 export default Technologies
-

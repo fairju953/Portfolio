@@ -8,6 +8,7 @@ const Experience = () => {
       whileInView={{opacity:1, y:0}}
         initial={{opacity:0, y: -100}}
         transition={{duration: 0.5}}
+        viewport={{ once: true }}
       className="text-white my-20 text-center text-4xl">Experience</motion.h2>
       <div>
         {EXPERIENCES.map ((Experience, index) => (
@@ -16,6 +17,7 @@ const Experience = () => {
                 whileInView={{opacity:1, x:0}}
                 initial={{opacity:0, x: -100}}
                 transition={{duration:1}}
+                viewport={{ once: true }}
                 className="w-full lg:w-1/4">
                 <p className="mb-2 text-sm text-neutral-200">{Experience.year}</p>
                 </motion.div>
@@ -23,6 +25,7 @@ const Experience = () => {
                 whileInView={{opacity:1, x:0}}
                 initial={{opacity: 0, x:100}}
                 transition={{duration:1}}
+                viewport={{ once: true }}
                 className="w-full max-w-xl lg:w-3/4"> 
                 <h6 className="mb-2 font-semibold text-white">
                     {Experience.role} -
@@ -31,7 +34,7 @@ const Experience = () => {
                     </span>
                 </h6>
                 <p className="mb-4 text-neutral-400">{Experience.description}</p>
-                {Experience.technologies.map((tech, techIndex)=> (<span key={techIndex} className="mr-2 mt-4 rounded bg-neutral-900 px-2 py-1 text-sm font-medium text-blue-500">{tech}</span>)) }
+                {Experience.technologies.map((tech, techIndex)=> (<span key={techIndex} className="mr-2 mt-4 rounded bg-neutral-900 px-2 py-1 text-sm font-medium text-blue-400">{tech}</span>)) }
                 </motion.div>
             </div>
         ))} 

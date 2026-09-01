@@ -13,10 +13,14 @@ const About = () => {
         whileInView={{opacity:1, x:0 }}
         initial={{opacity:0, x: -100}}
         transition={{duration: 0.5}}
-        
+        viewport={{ once: true }}
         className="w-full lg:w-1/2 lg:p-8">
         <div className="flex items-center justify-center">
-        <img className="rounded-2xl"src={aboutImg} alt="" />
+        <img
+          className="rounded-2xl"
+          src={aboutImg}
+          alt="Justin Fair working at his home desk, typing on a laptop with code on screen alongside two external monitors."
+        />
       </div>
     
       </motion.div>
@@ -24,6 +28,7 @@ const About = () => {
       whileInView={{opacity:1, x:0}}
       initial={{opacity: 0, x:100}}
       transition={{duration: 0.5}}
+      viewport={{ once: true }}
       className="w-full lg:w-1/2">
       <div className=" text-white flex justify-center lg:justify-start">
         <p className="my-2 max-w-xl py-6">{ABOUT_TEXT}</p>

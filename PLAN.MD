@@ -220,7 +220,24 @@ The frontmatter parser was extracted to [src/blog/frontmatter.js](src/blog/front
 
 Compounding this, the site is client-rendered with no prerendering or SSG, so the initial HTML payload contains no content at all. For a portfolio whose entire purpose is discoverability by recruiters, this is one of the highest-leverage areas to fix - and the cheapest, since a prerender plugin or per-route `<title>` updates require no architectural change.
 
-### 3.5 Accessibility
+### 3.5 Accessibility - RESOLVED 2026-09-01
+
+**Status: fixed.** Changes made:
+
+- **Accessible names on icon links.** The four social links are now labelled (for example "LinkedIn (opens in a new tab)"), with the icons marked `aria-hidden` and `focusable="false"`. They are also grouped in a list. Links are defined once in [src/constants/socials.js](src/constants/socials.js) and shared by the navbar and the new footer.
+- **Landmarks.** The navbar is wrapped in `<header>` with `<nav aria-label="Primary">`, routes render inside `<main id="main">`, and a `<footer>` was added with a copyright line and the social links. The contact block uses `<address>`.
+- **Skip link.** A visually hidden "Skip to main content" link appears on focus as the first tabbable element.
+- **`aria-current`.** The navbar uses `NavLink`, which applies `aria-current="page"` to the active link automatically.
+- **Alt text.** The About portrait had `alt=""`. It is a photo of Justin working at a laptop at his home desk with two external monitors, and now says so.
+- **Technologies section is no longer silent.** The six icons were decorative markup with no text; the list is now data-driven and each icon carries a `title` and `role="img"`, which react-icons renders as an SVG `<title>` element.
+- **Reduced motion.** The app is wrapped in `<MotionConfig reducedMotion="user">`, so framer-motion respects the OS setting, with a CSS `prefers-reduced-motion` block in [src/index.css](src/index.css) as a backstop. Every `whileInView` animation gained `viewport={{ once: true }}` so sections no longer re-animate on each scroll past.
+- **Focus visibility.** An explicit cyan `:focus-visible` outline replaces the browser default, which was nearly invisible against the dark background.
+
+**On contrast, the original finding was partly wrong and worth correcting.** Measured properly, the blurred fuchsia wash lightens the page background to `#412b44` rather than leaving it at `#171717`, which *helps* text contrast. Measured ratios: `text-neutral-400` body copy 5.03:1 (passes), `text-neutral-300` 8.57:1, `text-blue-400` company names 4.99:1, headings 12.70:1.
+
+The one genuine failure was the Projects tech tags: `text-blue-800` on an opaque `bg-neutral-900` pill measured **2.06:1** against a 4.5:1 requirement. Both the Projects and Experience tags are now `text-blue-400`, which measures 7.05:1. A `border-neutral-600` divider on the 404 and post pages measured 1.63:1 against the 3:1 requirement for non-text UI and moved to `neutral-400`.
+
+Not verified: no browser-based audit (axe, Lighthouse) or manual keyboard pass was run, so this covers the defects identified by inspection rather than a full conformance check. The original finding follows.
 
 - **Icon-only links have no accessible name.** All four social links in `src/components/Navbar.jsx` wrap only an SVG icon, so a screen reader announces "link" with no destination. Each needs an `aria-label` or visually hidden text.
 - **No landmarks.** No `<main>`, `<header>`, `<footer>`, or `<nav aria-label>` structure; the entire app sits in generic `<div>` elements.
@@ -294,8 +311,8 @@ This is where the site loses the most opportunity, and none of it requires new e
 16. Replace the Technologies section content with the actual home lab stack (Active Directory, Windows Server, Wazuh, Sysmon, Docker, Linux, osTicket, Nextcloud, networking), ideally grouped by category and driven from `constants/index.js` rather than hardcoded JSX.
 17. Rebuild the Projects section around the home lab: the AD domain lab, the Wazuh SIEM deployment with Sysmon telemetry and custom detection rules, the osTicket help desk on Raspberry Pi with automated alert-to-ticket integration, and the Nextcloud stack with automated backups - each with outcome-focused copy, real screenshots or an architecture diagram, and a link to the matching blog post.
 18. Add an Education and Certifications section (Kean University BS in IT; CompTIA Security+, April 2026) and a resume PDF download in the Hero and Contact areas.
-19. Add a footer with copyright, social links, and a last-updated date.
-20. Add accessible names to all icon links, wrap page content in `<main>`, add a skip link and `aria-current` on nav, and give the About portrait a real `alt`.
+19. PARTIAL - A footer with copyright and social links now exists. A last-updated date was not added.
+20. DONE - Add accessible names to all icon links, wrap page content in `<main>`, add a skip link and `aria-current` on nav, and give the About portrait a real `alt`.
 
 ### Priority 3 - Polish and infrastructure
 

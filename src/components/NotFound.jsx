@@ -22,10 +22,10 @@ const NotFound = () => {
         That page does not exist or may have been moved.
       </p>
       <div className="mt-8 flex gap-6">
-        <Link to="/" className="border-b border-neutral-600 hover:text-cyan-400 transition">
+        <Link to="/" className="border-b border-neutral-400 hover:text-cyan-400 transition">
           Go home
         </Link>
-        <Link to="/blog" className="border-b border-neutral-600 hover:text-cyan-400 transition">
+        <Link to="/blog" className="border-b border-neutral-400 hover:text-cyan-400 transition">
           Read the blog
         </Link>
       </div>

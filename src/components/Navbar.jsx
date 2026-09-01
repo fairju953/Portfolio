@@ -1,46 +1,49 @@
-import { FaLinkedin, FaGithub, FaTwitterSquare, FaInstagram } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { SOCIAL_LINKS } from "../constants/socials";
+
+const navLinkClass = ({ isActive }) =>
+  `transition hover:text-cyan-400 ${isActive ? "text-cyan-400" : ""}`;
 
 const Navbar = () => {
   return (
-    <nav className="mb-20 flex items-center justify-between py-6">
-      <div className="flex flex-shrink-0 items-center">
-        <span className="ml-2 text-3xl font-bold text-white">JF</span>
-      </div>
+    <header>
+      <nav
+        aria-label="Primary"
+        className="mb-20 flex items-center justify-between py-6"
+      >
+        <div className="flex flex-shrink-0 items-center">
+          <span className="ml-2 text-3xl font-bold text-white">JF</span>
+        </div>
 
-      {/* Navigation links */}
-      <div className="flex items-center gap-6 text-white">
-        <Link
-          to="/"
-          className="hover:text-cyan-400 transition"
-        >
-          Home
-        </Link>
+        {/* NavLink applies aria-current="page" on the active link itself. */}
+        <div className="flex items-center gap-6 text-white">
+          <NavLink to="/" end className={navLinkClass}>
+            Home
+          </NavLink>
 
-        <Link
-          to="/blog"
-          className="hover:text-cyan-400 transition"
-        >
-          Blog
-        </Link>
-      </div>
+          <NavLink to="/blog" className={navLinkClass}>
+            Blog
+          </NavLink>
+        </div>
 
-      {/* Social icons */}
-      <div className="m-8 flex items-center justify-center gap-4 text-2xl text-white">
-        <a href="https://linkedin.com/in/justin-fair-503b56b4" target="_blank" rel="noreferrer">
-          <FaLinkedin />
-        </a>
-        <a href="https://github.com/fairju953" target="_blank" rel="noreferrer">
-          <FaGithub />
-        </a>
-        <a href="https://instagram.com" target="_blank" rel="noreferrer">
-          <FaInstagram />
-        </a>
-        <a href="https://twitter.com" target="_blank" rel="noreferrer">
-          <FaTwitterSquare />
-        </a>
-      </div>
-    </nav>
+        {/* Social icons */}
+        <ul className="m-8 flex items-center justify-center gap-4 text-2xl text-white">
+          {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+            <li key={label}>
+              <a
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${label} (opens in a new tab)`}
+                className="inline-block rounded transition hover:text-cyan-400"
+              >
+                <Icon aria-hidden="true" focusable="false" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
   );
 };
 

@@ -41,7 +41,7 @@ const BlogPost = () => {
         <p>Post not found</p>
         <Link
           to="/blog"
-          className="mt-6 inline-block border-b border-neutral-600 hover:text-cyan-400 transition"
+          className="mt-6 inline-block border-b border-neutral-400 hover:text-cyan-400 transition"
         >
           Back to all posts
         </Link>
