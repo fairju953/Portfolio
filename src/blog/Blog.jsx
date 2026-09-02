@@ -4,7 +4,9 @@ import { formatDate } from "./formatDate";
 import { useSeo } from "../seo/useSeo";
 import { SITE_NAME } from "../seo/siteMeta";
 
-const sortedPosts = [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
+const sortedPosts = [...posts].sort(
+  (a, b) => new Date(b.date) - new Date(a.date)
+);
 
 const Blog = () => {
   // The filter lives in the URL so a tag view can be linked and shared. The
@@ -27,7 +29,8 @@ const Blog = () => {
     <div className="text-white">
       <h1 className="mb-4 text-4xl font-bold">Blog</h1>
       <p className="mb-8 max-w-2xl text-neutral-400">
-        Notes from the home lab, including the parts that did not work the first time.
+        Notes from the home lab, including the parts that did not work the first
+        time.
       </p>
 
       <nav aria-label="Filter posts by tag" className="mb-10">
@@ -65,14 +68,24 @@ const Blog = () => {
 
       {visiblePosts.length === 0 ? (
         <p className="text-neutral-400">
-          No posts tagged &ldquo;{activeTag}&rdquo;. <Link to="/blog" className="text-cyan-400 hover:underline">Show all posts</Link>.
+          No posts tagged &ldquo;{activeTag}&rdquo;.{" "}
+          <Link to="/blog" className="text-cyan-400 hover:underline">
+            Show all posts
+          </Link>
+          .
         </p>
       ) : (
         <ul className="space-y-8">
           {visiblePosts.map((post) => (
-            <li key={post.slug} className="border-b border-neutral-800 pb-8 last:border-b-0">
+            <li
+              key={post.slug}
+              className="border-b border-neutral-800 pb-8 last:border-b-0"
+            >
               <h2 className="mb-2 text-xl font-semibold">
-                <Link to={`/blog/${post.slug}`} className="text-cyan-400 hover:underline">
+                <Link
+                  to={`/blog/${post.slug}`}
+                  className="text-cyan-400 hover:underline"
+                >
                   {post.title}
                 </Link>
               </h2>

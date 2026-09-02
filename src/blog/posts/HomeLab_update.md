@@ -20,8 +20,8 @@ With Wazuh operational, I began deploying agents throughout the lab.
 
 So far, I have successfully connected:
 
-* Windows Server 2022 Domain Controller
-* Windows 11 Client
+- Windows Server 2022 Domain Controller
+- Windows 11 Client
 
 Once the agents were online, I verified that both systems were actively reporting to the Wazuh dashboard.
 
@@ -43,10 +43,10 @@ My next goal is to configure email notifications and eventually connect security
 
 Over the next few weeks, I plan to:
 
-* Deploy Wazuh agents to additional systems
-* Monitor my Raspberry Pi and personal laptop
-* Configure email notifications in osTicket
-* Build detection rules and alerting workflows
-* Add a Kali Linux VM to safely generate test events and improve my detection capabilities
+- Deploy Wazuh agents to additional systems
+- Monitor my Raspberry Pi and personal laptop
+- Configure email notifications in osTicket
+- Build detection rules and alerting workflows
+- Add a Kali Linux VM to safely generate test events and improve my detection capabilities
 
 This project has already taught me a lot about Windows administration, Linux troubleshooting, security monitoring, and incident management. I'm looking forward to continuing to expand the lab and documenting what I learn along the way.

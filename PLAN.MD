@@ -297,7 +297,20 @@ Not verified: no browser-based visual check was run on any of this, so layout an
 - **Blog features that the data already supports but the UI does not use:** tags are parsed and displayed on posts but are not filterable or linked; there are no post excerpts on the list page, no reading time, no post images, no RSS feed, and no pagination (not yet needed at five posts, but the list will get unwieldy).
 - **Publishing cadence is uneven.** Posts cluster in May, then gap to June, August, and September. Cadence matters more than volume for a learning journal, and the gaps are the main thing a reader tracking your progress would notice.
 
-### 3.8 Code Quality and Maintainability
+### 3.8 Code Quality and Maintainability - RESOLVED 2026-09-02
+
+**Status: fixed, except a test suite was not added.** A static marketing site does not get much from unit tests; the failure mode that actually mattered was a throw blanking the whole page, which the error boundary covers.
+
+- **Dead home page and leaked-credential component are gone.** `Home.jsx` and `ChatGPTComponent.jsx` were deleted in 3.1. The live home page is the inline `Home` in `App.jsx`.
+- **Scaffolding is gone.** The `SAFETY FALLBACK` comment and empty block are no longer in `App.jsx`.
+- **Formatting is now a script, not a convention.** Prettier 3 with `npm run format` / `npm run format:check`, `eslint-config-prettier` so ESLint does not fight it, and CI runs the check. `PLAN.MD` and `src/blog/posts` are ignored so a new post does not fail CI for wrapping. The rest of the JS/JSX was formatted once.
+- **Shared motion variants** live in [src/motion.js](src/motion.js). Section titles, left/right slide-ins, fade-up, the hero stagger, and the technology icon bob all read from there. Technologies was already data-driven from 3.7.
+- **Array-index keys in Experience are gone.** Rows key on company plus year; tech tags key on the tag string.
+- **Error boundary** wraps the routed content in `App.jsx`. Navbar and footer stay up if a section throws. It remounts on pathname change so a later route is not stuck on the fallback.
+- **README describes this project**, not the Vite template. The corrupted UTF-16 file was replaced.
+- **Node is pinned.** [`.nvmrc`](.nvmrc) is `24`, matching what CI used to hardcode. `engines.node` is `>=20.19.0` (Vite 7's floor). CI now reads `.nvmrc`.
+
+Not added: a test runner. Previous/next post navigation remains a 3.7 leftover, not 3.8. The original finding follows.
 
 - **Two competing home page definitions.** `App.jsx` lines 18-26 define an inline `Home`, while `src/components/Home.jsx` defines a different one. The file-based version is dead but is the one that still references the leaked credential.
 - **Leftover scaffolding.** `App.jsx` lines 32-33 contain a `SAFETY FALLBACK (INLINE STYLE - MUST SHOW)` comment above an empty block, plus stray blank lines.
@@ -346,8 +359,8 @@ Not verified: no browser-based visual check was run on any of this, so layout an
 21. DONE - Compress and convert images to WebP, add explicit dimensions and `loading="lazy"`. Responsive `srcset` was not added; at these display sizes a single well-sized WebP is enough.
 22. DONE - Move the font from CSS `@import` to a preconnected `<link>`.
 23. DONE - Pin `framer-motion` to a stable release, add `viewport={{ once: true }}` to scroll animations, and respect `prefers-reduced-motion`.
-24. PARTIAL - The blog routes are code-split with `React.lazy`. An error boundary was not added, so a throw in any section still blanks the page.
-25. Extract shared animation variants, make Technologies data-driven, add Prettier plus a `format` script, and rewrite the README to describe this project (with `.nvmrc` or an `engines` field).
+24. DONE - The blog routes are code-split with `React.lazy`. An error boundary wraps the routed content so a throw no longer blanks the navbar and footer.
+25. DONE - Shared animation variants live in `src/motion.js`. Technologies is data-driven. Prettier plus `format` / `format:check` scripts, README rewritten, `.nvmrc` and `engines` added.
 26. DONE - Add a GitHub Actions workflow running `npm ci`, `npm run lint`, and `npm run build` on every push, wired to automatic deploys.
 27. PARTIAL - List excerpts, reading time, URL-driven tag filtering, and a build-time `rss.xml` are all shipped. Previous/next post navigation was not added.
 28. Consider audit-driven verification: Lighthouse for performance and SEO, axe DevTools for accessibility, and a manual keyboard-only pass.
@@ -363,4 +376,4 @@ The gap was that the front page did not reflect what the blog proves. It adverti
 
 Four things mattered most: revoke the leaked Hugging Face token, add the SPA rewrite rule so shared blog links actually open, publish the September Wazuh investigation post, and realign the Technologies, Projects, and Education sections with the SOC analyst goal. All four are now done.
 
-What is left is genuinely smaller than what has been fixed, and splits into two kinds of work. **Unverified rather than unfinished:** a Lighthouse run, an axe pass, and a keyboard-only walkthrough are still owed. **Genuine remaining engineering:** an error boundary so one throw cannot blank the page, Prettier and a README that describes this project rather than the Vite template, shared animation variants, and previous/next post navigation. The one thing no amount of engineering can supply is publishing cadence, which for a learning journal is what a returning reader actually notices.
+What is left is genuinely smaller than what has been fixed, and splits into two kinds of work. **Unverified rather than unfinished:** a Lighthouse run, an axe pass, and a keyboard-only walkthrough are still owed. **Genuine remaining engineering:** previous/next post navigation, and a test suite if that ever becomes worth the overhead. The one thing no amount of engineering can supply is publishing cadence, which for a learning journal is what a returning reader actually notices.

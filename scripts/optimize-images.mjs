@@ -19,10 +19,30 @@ const assets = fileURLToPath(new URL("../src/assets", import.meta.url));
 const TARGETS = [
   { file: "pic.jpg", out: "pic.webp", width: 600, quality: 82 },
   { file: "pic2.png", out: "pic2.webp", width: 1000, quality: 80 },
-  { file: "projects/project-1.jpg", out: "projects/project-1.webp", width: 300, quality: 80 },
-  { file: "projects/project-2.jpg", out: "projects/project-2.webp", width: 300, quality: 80 },
-  { file: "projects/project-3.jpg", out: "projects/project-3.webp", width: 300, quality: 80 },
-  { file: "projects/project-4.jpg", out: "projects/project-4.webp", width: 300, quality: 80 },
+  {
+    file: "projects/project-1.jpg",
+    out: "projects/project-1.webp",
+    width: 300,
+    quality: 80,
+  },
+  {
+    file: "projects/project-2.jpg",
+    out: "projects/project-2.webp",
+    width: 300,
+    quality: 80,
+  },
+  {
+    file: "projects/project-3.jpg",
+    out: "projects/project-3.webp",
+    width: 300,
+    quality: 80,
+  },
+  {
+    file: "projects/project-4.jpg",
+    out: "projects/project-4.webp",
+    width: 300,
+    quality: 80,
+  },
 ];
 
 const kb = (bytes) => Math.round(bytes / 1024);

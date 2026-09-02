@@ -4,7 +4,8 @@
 // Frontmatter must open on the very first line so that a `---` inside a post
 // body can never be mistaken for a delimiter. The closing delimiter allows
 // three or more dashes because some posts pad it out to underline the title.
-const FRONTMATTER = /^\uFEFF?---[ \t]*\r?\n([\s\S]*?)\r?\n-{3,}[ \t]*(?:\r?\n|$)/;
+const FRONTMATTER =
+  /^\uFEFF?---[ \t]*\r?\n([\s\S]*?)\r?\n-{3,}[ \t]*(?:\r?\n|$)/;
 
 function stripQuotes(value) {
   return value.replace(/^["']|["']$/g, "");

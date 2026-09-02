@@ -15,7 +15,9 @@ const BlogPost = () => {
   const path = `/blog/${slug}`;
 
   useSeo({
-    title: post ? `${post.title} | ${SITE_NAME}` : `Post not found | ${SITE_NAME}`,
+    title: post
+      ? `${post.title} | ${SITE_NAME}`
+      : `Post not found | ${SITE_NAME}`,
     description: post ? description : "That post does not exist.",
     path,
     type: "article",
@@ -53,7 +55,6 @@ const BlogPost = () => {
   return (
     <div className="flex justify-center px-4 py-12">
       <article className="prose prose-invert max-w-3xl w-full">
-
         <Link
           to="/blog"
           className="no-underline text-sm text-neutral-400 hover:text-cyan-400 transition"
@@ -98,7 +99,6 @@ const BlogPost = () => {
             {post.content}
           </ReactMarkdown>
         </div>
-
       </article>
     </div>
   );

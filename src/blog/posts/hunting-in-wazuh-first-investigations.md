@@ -16,8 +16,8 @@ Stock Wazuh fired on **nested PowerShell** (one `powershell.exe` starting anothe
 
 I added two custom rules:
 
-* **100110** — PowerShell with Bypass or an encoded command (medium)
-* **100111** — the same, at High or System integrity (high)
+- **100110** — PowerShell with Bypass or an encoded command (medium)
+- **100111** — the same, at High or System integrity (high)
 
 The second one fired on the lab command at level 12. That is a **benign true positive**: the detection is right, and I did it on purpose. Harmless `Get-Process` does not make it a false positive.
 
@@ -47,11 +47,11 @@ For scheduled tasks (**4698**), nothing showed until I turned on **Other Object 
 
 ## What I am practicing
 
-| Label | Meaning |
-|---|---|
-| True positive | Detection is right, and it is hostile (or would be outside the lab) |
-| False positive | Detection fired, but the pattern is not what the rule is for |
-| Benign true positive | Detection is right; I (or Windows) did it for a legitimate reason |
+| Label                | Meaning                                                             |
+| -------------------- | ------------------------------------------------------------------- |
+| True positive        | Detection is right, and it is hostile (or would be outside the lab) |
+| False positive       | Detection fired, but the pattern is not what the rule is for        |
+| Benign true positive | Detection is right; I (or Windows) did it for a legitimate reason   |
 
 I am not adding Kali or a vulnerable VM yet. Next I am checking whether Wazuh actually **tags** these cases with MITRE ATT&CK in the Dashboard.
 

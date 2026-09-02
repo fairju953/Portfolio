@@ -15,6 +15,7 @@ import Education from "./components/Education";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import NotFound from "./components/NotFound";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { useSeo } from "./seo/useSeo";
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from "./seo/siteMeta";
 
@@ -22,7 +23,6 @@ import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from "./seo/siteMeta";
 // initial bundle for visitors who only ever look at the home page.
 const Blog = lazy(() => import("./blog/Blog"));
 const BlogPost = lazy(() => import("./blog/BlogPost"));
-
 
 // The Person JSON-LD for this route is served statically from index.html.
 const Home = () => {
@@ -63,20 +63,25 @@ const App = () => {
           <Navbar />
 
           <main id="main">
-            <Suspense
-              fallback={
-                <p className="py-20 text-center text-neutral-400" role="status">
-                  Loading...
-                </p>
-              }
-            >
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:slug" element={<BlogPost />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
+            <ErrorBoundary>
+              <Suspense
+                fallback={
+                  <p
+                    className="py-20 text-center text-neutral-400"
+                    role="status"
+                  >
+                    Loading...
+                  </p>
+                }
+              >
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/blog/:slug" element={<BlogPost />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
           </main>
 
           <Footer />

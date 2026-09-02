@@ -1,0 +1,9 @@
+dist
+node_modules
+package-lock.json
+*.webp
+*.png
+*.jpg
+*.pdf
+PLAN.MD
+src/blog/posts

@@ -32,6 +32,7 @@ Even though the osTicket files existed correctly in `/var/www/html/osticket`, th
 ## Troubleshooting
 
 I began checking:
+
 - Apache configurations
 - virtual hosts
 - file permissions
@@ -52,8 +53,8 @@ sudo ss -tulpn | grep :80
 
 This revealed that:
 
-* Pi-hole was already using port 80
-* Apache was actually running on port 8080
+- Pi-hole was already using port 80
+- Apache was actually running on port 8080
 
 Because of this, requests to:
 
@@ -75,11 +76,11 @@ Once I used the correct port, osTicket loaded successfully.
 
 This troubleshooting process reinforced several important IT concepts:
 
-* Port conflicts between services
-* Apache troubleshooting
-* Linux networking fundamentals
-* Service binding and listening ports
-* Reading logs and validating configurations
+- Port conflicts between services
+- Apache troubleshooting
+- Linux networking fundamentals
+- Service binding and listening ports
+- Reading logs and validating configurations
 
 Most importantly, I learned how important it is to troubleshoot methodically instead of guessing.
 

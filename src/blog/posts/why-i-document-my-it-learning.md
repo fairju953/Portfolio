@@ -36,6 +36,7 @@ After reviewing the password policy, I discovered that the minimum password leng
 Instead of lowering the requirement, I decided to keep the policy unchanged to maintain a more realistic security standard within my lab.
 
 To resolve the issue, I updated the password I was using to meet the domain’s complexity and length requirements. Once I used a compliant password, I was able to successfully create the user account.
+
 ## What I Learned
 
 This experience reinforced a few important concepts:
