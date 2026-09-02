@@ -11,6 +11,7 @@ import Hero from "./components/Hero";
 import About from "./components/About";
 import Technologies from "./components/Technologies";
 import Experience from "./components/Experience";
+import Education from "./components/Education";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import NotFound from "./components/NotFound";
@@ -32,8 +33,9 @@ const Home = () => {
       <Hero />
       <About />
       <Technologies />
-      <Experience />
       <Projects />
+      <Experience />
+      <Education />
       <Contact />
     </>
   );

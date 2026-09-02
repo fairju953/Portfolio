@@ -6,6 +6,12 @@ const Footer = () => {
       <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
         <p>&copy; {new Date().getFullYear()} Justin Fair</p>
 
+        {/* Emitted at build time by the rss plugin in vite.config.js, so it is
+            a real file rather than a client route. */}
+        <a href="/rss.xml" className="rounded transition hover:text-cyan-400">
+          RSS feed
+        </a>
+
         <ul className="flex items-center gap-5 text-xl">
           {SOCIAL_LINKS.map(({ label, href, Icon }) => (
             <li key={label}>

@@ -16,7 +16,7 @@ A single-page React application that serves as the personal portfolio and techni
 
 - Build tool: Vite 7.3.2 with `@vitejs/plugin-react`
 - Framework: React 18.3.1 (`StrictMode`, client-side rendering only)
-- Routing: `react-router-dom` 7.14.2 (`BrowserRouter`)
+- Routing: `react-router-dom` 7.18.3 (`BrowserRouter`)
 - Styling: Tailwind CSS 3.4.11 + PostCSS + Autoprefixer, Inter font via Google Fonts `@import`
 - Animation: `framer-motion` 12.0.0-alpha.0
 - Icons: `react-icons` 5.3.0
@@ -268,9 +268,24 @@ Not verified: no Lighthouse run or real-device timing, and the animations were n
 - `framer-motion` is pinned to `^12.0.0-alpha.0`, a prerelease. The caret range on an alpha means npm can pull in other prereleases, and there is no guarantee of stability or fixes.
 - `axios` is declared as `"^0.x.x"` - an unusual, effectively unbounded range within 0.x - for a component that is never rendered. It resolves to 0.32.0 today.
 
-### 3.7 Content and Positioning
+### 3.7 Content and Positioning - RESOLVED 2026-09-01
 
-This is where the site loses the most opportunity, and none of it requires new engineering.
+**Status: fixed.**
+
+Everything written into the site was sourced from the blog posts themselves rather than invented, so each claim on the front page can be traced to a post that documents it.
+
+- **Technologies now matches the blog.** Ten labelled icons for Active Directory, Wazuh, Sysmon, Linux, Docker, Raspberry Pi, PowerShell, MariaDB, Apache and Nextcloud, plus a secondary row of twelve items that have no recognisable logo, including Group Policy, custom SIEM detection rules and Windows Event Log analysis. Visible text labels were added deliberately: a shield icon standing for "Wazuh" is not guessable, and the label doubles as the accessible name, which is better than the tooltip it replaced.
+- **Projects is now the four home lab builds**, each written as problem, approach and outcome, each linking to the post that documents it. Specifics come from the posts: rules 100110 and 100111, the Pi-hole collision on port 80, the 14-character password policy that was met rather than lowered, and the level 12 alert-to-ticket threshold. The four generic coursework thumbnails were dropped rather than replaced, which also removed 38 KB of images from the bundle. Projects was moved above Experience so the technical evidence lands before the claims history.
+- **Education and Certifications is a real section** carrying the Kean BS in IT (2025) and Security+ (April 2026), and both are now also expressed as `alumniOf` and `hasCredential` in the `Person` JSON-LD. That schema was being duplicated in an unused `PERSON_JSON_LD` export in `src/seo/siteMeta.js`; the export was deleted so `index.html` is the single source.
+- **Hero and About were realigned** to lead with IT support and security operations. The claims-investigation background is now framed as the transferable skill it actually is - gather evidence, read it carefully, write a defensible verdict - rather than being left as an unexplained career detour. The dev stack survives as a supporting point about working with engineering teams.
+- **A résumé button** sits in the hero and a matching link sits in Contact, both pointing at `/resume.pdf`. The file is in `public/` (a real PDF, about 197 KB). Vercel serves files from `public/` before the SPA rewrite, so the link will not fall through to the 404 page.
+- **Instagram and X are gone.** Both pointed at bare `instagram.com` and `twitter.com` homepages, so they were placeholders rather than profiles. LinkedIn and GitHub remain.
+- **Typos fixed**, plus a class of problem the original review missed: two posts had list items written without a space after the dash, so they were silently rendering as run-on paragraphs rather than lists. A heading in the same post was also plain text. Those are fixed.
+- **Blog features shipped.** The list page now shows an excerpt and a reading time per post; tags are clickable and filter the list through a `?tag=` URL parameter, so a filtered view can be shared, and the canonical stays on `/blog` so filtered views are not indexed as duplicates. An `rss.xml` feed is generated at build time by the same plugin pattern as the sitemap and is linked from the footer and `index.html`. Building the filter exposed that the tags themselves were inconsistent - the Nextcloud post carried "IT Support, Help Desk, Troubleshooting" copied from an earlier post, and "IT Help Desk" and "Help Desk" existed as separate tags - so the tags were normalised across all six posts into a coherent cloud.
+
+- **Contact is no longer a placeholder.** Phone is omitted. Location is Manchester Township, NJ. Email is a personal Gmail rather than the Kean `.edu` account. Previous/next post navigation and publishing cadence are untouched.
+
+Not verified: no browser-based visual check was run on any of this, so layout and animation behaviour after the Technologies and Projects rewrites are unconfirmed. The original finding follows.
 
 - **The Technologies section contradicts the stated goal.** It advertises React, Next.js, MongoDB, Redis, Node.js, and PostgreSQL - a MERN/web-developer skill set. The tagline, the About text, and all six blog posts point at IT support and SOC analysis. A visitor scanning the page gets a mixed signal about which job is being applied for. The genuinely demonstrated technologies, all evidenced in the blog, are absent: Active Directory, Windows Server 2022, Group Policy, Windows 11, Wazuh, Sysmon, custom SIEM detection rules, Windows Event Log analysis, osTicket, Docker and Docker Compose, Nextcloud, MariaDB, Pi-hole, Apache, Linux/Ubuntu, Raspberry Pi, VirtualBox, PowerShell, and Bash scripting.
 - **The Projects section omits the strongest evidence.** The four listed projects are coursework-flavored (a coffee shop simulation, a generic Java application, a WordPress blog) and none has a repository or demo link. Meanwhile the home lab - a domain controller, a SIEM with endpoint agents, a working ticketing system, a self-hosted cloud with automated backups - is the actual proof of capability and appears only in prose. Promoting three or four home lab projects into this section, each with a problem/approach/outcome summary and a link to the corresponding blog post, would be the single highest-impact content change on the site.
@@ -308,21 +323,21 @@ This is where the site loses the most opportunity, and none of it requires new e
 
 5. DONE - Install `@tailwindcss/typography` and register it in `tailwind.config.js` so the blog's `prose` classes take effect; then remove the manual `.prose` overrides from `src/index.css`.
 6. DONE - Fix the invalid class names: `bgn-neutral-900`, `pb=20`, `lg:mg-35`, `lg:mt-15`.
-7. PARTIAL - The email, phone, and LinkedIn entries are now real `mailto:`, `tel:`, and `https://` links. The underlying values are still placeholders: the 555 number, the campus address, and the `.edu` email need replacing with professional equivalents on jbtechbyte.com.
-8. Point the Instagram and Twitter/X icons at real profiles, or remove them.
+7. DONE - Contact shows Manchester Township, NJ and a personal Gmail via `mailto:`. LinkedIn is a real `https://` link. The 555 number is gone.
+8. DONE - Instagram and X were removed. Both pointed at bare site homepages rather than profiles, so there was nothing to preserve. LinkedIn and GitHub remain in the navbar and footer.
 9. DONE - Add a `<Route path="*">` catch-all 404, and a "Back to Blog" link on post pages.
 10. DONE - Fix the two ESLint errors and get `npm run lint` to exit 0.
 11. DONE - Harden the frontmatter parser in `src/blog/posts.js`, pass `remarkPlugins={[remarkGfm]}` to `ReactMarkdown`, and migrate `{ as: "raw" }` to `{ query: "?raw", import: "default" }`. See the note in section 3.2 on why `gray-matter` was dropped rather than adopted.
-12. PARTIAL - The malformed delimiters in `HomeLab_update.md` and the stray fences in `Troubleshooting_osTicket.md` are fixed. Proofreading the six posts and the constants file for the spelling errors listed in section 3.7 is still outstanding.
+12. DONE - The malformed delimiters in `HomeLab_update.md` and the stray fences in `Troubleshooting_osTicket.md` were fixed earlier; the spelling errors in the posts and the constants file are now fixed too. Proofreading also turned up two lists written without a space after the dash, which had been rendering as run-on paragraphs.
 13. DONE - Commit and deploy `hunting-in-wazuh-first-investigations.md`. It is the most compelling content on the site.
 
 ### Priority 2 - Discoverability and impact (one day)
 
 14. DONE - Rewrite `index.html`: descriptive title, meta description, real favicon, Open Graph and Twitter Card tags with a preview image, canonical URL. Add `robots.txt`, and generate `sitemap.xml` at build time.
 15. DONE - Add per-route document titles and meta descriptions (implemented as a small `useSeo` hook rather than `react-helmet-async`), plus `BlogPosting` and `Person` JSON-LD.
-16. Replace the Technologies section content with the actual home lab stack (Active Directory, Windows Server, Wazuh, Sysmon, Docker, Linux, osTicket, Nextcloud, networking), ideally grouped by category and driven from `constants/index.js` rather than hardcoded JSX.
-17. Rebuild the Projects section around the home lab: the AD domain lab, the Wazuh SIEM deployment with Sysmon telemetry and custom detection rules, the osTicket help desk on Raspberry Pi with automated alert-to-ticket integration, and the Nextcloud stack with automated backups - each with outcome-focused copy, real screenshots or an architecture diagram, and a link to the matching blog post.
-18. Add an Education and Certifications section (Kean University BS in IT; CompTIA Security+, April 2026) and a resume PDF download in the Hero and Contact areas.
+16. DONE - Technologies now carries the real stack as ten labelled icons plus a secondary row for the items with no logo. The data lives in `Technologies.jsx` rather than `constants/index.js`, because it is icon-component references rather than plain content and does not belong in a file the other sections read for copy.
+17. DONE - Projects is rebuilt around the four home lab builds with problem/approach/outcome copy and a link to each matching post. Screenshots and an architecture diagram were not used: the generic thumbnails were removed instead, since a real screenshot would have to come from the lab itself.
+18. DONE - Education and Certifications is in place. The résumé lives at `public/resume.pdf` and is linked from both the hero and Contact.
 19. PARTIAL - A footer with copyright and social links now exists. A last-updated date was not added.
 20. DONE - Add accessible names to all icon links, wrap page content in `<main>`, add a skip link and `aria-current` on nav, and give the About portrait a real `alt`.
 
@@ -334,8 +349,9 @@ This is where the site loses the most opportunity, and none of it requires new e
 24. PARTIAL - The blog routes are code-split with `React.lazy`. An error boundary was not added, so a throw in any section still blanks the page.
 25. Extract shared animation variants, make Technologies data-driven, add Prettier plus a `format` script, and rewrite the README to describe this project (with `.nvmrc` or an `engines` field).
 26. DONE - Add a GitHub Actions workflow running `npm ci`, `npm run lint`, and `npm run build` on every push, wired to automatic deploys.
-27. Blog enhancements: tag filter pages, list excerpts, reading time, an RSS feed, and previous/next post navigation.
+27. PARTIAL - List excerpts, reading time, URL-driven tag filtering, and a build-time `rss.xml` are all shipped. Previous/next post navigation was not added.
 28. Consider audit-driven verification: Lighthouse for performance and SEO, axe DevTools for accessibility, and a manual keyboard-only pass.
+29. DONE - Security: `react-router-dom` moved from 7.14.2 to 7.18.3, clearing two high-severity advisories whose affected range ended at 7.18.1. The bump stays inside major 7, so no API surface changed. A follow-up non-breaking `npm audit fix` took Vite to 7.3.6 and cleared the nine remaining advisories, all of which were build tooling that never reaches a visitor. `npm audit` now reports zero vulnerabilities.
 
 ---
 
@@ -343,6 +359,8 @@ This is where the site loses the most opportunity, and none of it requires new e
 
 The site is a working, cleanly animated React portfolio with a functional file-based blog, and the blog content itself - methodical, honest troubleshooting and investigation write-ups, culminating in a genuine SOC triage workflow with custom Wazuh rules and alert-to-ticket automation - is its strongest asset by a wide margin.
 
-The gap is that the front page does not reflect what the blog proves. It advertises a web-developer stack the author is not targeting, lists coursework projects instead of the home lab, hides the degree and Security+ certification inside a post from May, and closes with placeholder contact details.
+The gap was that the front page did not reflect what the blog proves. It advertised a web-developer stack the author is not targeting, listed coursework projects instead of the home lab, hid the degree and Security+ certification inside a post from May, and closed with placeholder contact details.
 
-Four things mattered most: revoke the leaked Hugging Face token, add the SPA rewrite rule so shared blog links actually open, publish the September Wazuh investigation post, and realign the Technologies, Projects, and Education sections with the SOC analyst goal. The first three are done. The fourth - making the front page reflect what the blog proves - is now the highest-value work remaining, and it is content, not engineering.
+Four things mattered most: revoke the leaked Hugging Face token, add the SPA rewrite rule so shared blog links actually open, publish the September Wazuh investigation post, and realign the Technologies, Projects, and Education sections with the SOC analyst goal. All four are now done.
+
+What is left is genuinely smaller than what has been fixed, and splits into two kinds of work. **Unverified rather than unfinished:** a Lighthouse run, an axe pass, and a keyboard-only walkthrough are still owed. **Genuine remaining engineering:** an error boundary so one throw cannot blank the page, Prettier and a README that describes this project rather than the Vite template, shared animation variants, and previous/next post navigation. The one thing no amount of engineering can supply is publishing cadence, which for a learning journal is what a returning reader actually notices.

@@ -4,11 +4,30 @@ import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { parseFrontmatter, slugFromPath } from './src/blog/frontmatter.js'
+import { toExcerpt } from './src/seo/excerpt.js'
 
 const SITE_URL = 'https://www.jbtechbyte.com'
+const SITE_TITLE = 'Justin Fair'
+const FEED_DESCRIPTION =
+  'Write-ups from my home lab: Active Directory, Wazuh detection rules, Sysmon telemetry, osTicket, and the troubleshooting behind each of them.'
 
 function escapeXml(value) {
   return value.replace(/[<>&'"]/g, (c) => `&${{ '<': 'lt', '>': 'gt', '&': 'amp', "'": 'apos', '"': 'quot' }[c]};`)
+}
+
+// Read straight off disk rather than through the app's module graph: these run
+// at build time, where import.meta.glob is not available.
+function readPosts() {
+  const postsDir = fileURLToPath(new URL('./src/blog/posts', import.meta.url))
+
+  return readdirSync(postsDir)
+    .filter((file) => file.endsWith('.md'))
+    .map((file) => {
+      const { metadata, body } = parseFrontmatter(readFileSync(join(postsDir, file), 'utf8'))
+      return { slug: slugFromPath(file), title: metadata.title, date: metadata.date, body }
+    })
+    .filter((post) => post.date)
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
 }
 
 // Emits sitemap.xml at build time so new posts are listed automatically
@@ -18,16 +37,7 @@ function sitemap() {
     name: 'generate-sitemap',
     apply: 'build',
     generateBundle() {
-      const postsDir = fileURLToPath(new URL('./src/blog/posts', import.meta.url))
-
-      const posts = readdirSync(postsDir)
-        .filter((file) => file.endsWith('.md'))
-        .map((file) => {
-          const { metadata } = parseFrontmatter(readFileSync(join(postsDir, file), 'utf8'))
-          return { slug: slugFromPath(file), date: metadata.date }
-        })
-        .filter((post) => post.date)
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
+      const posts = readPosts()
 
       const newest = posts[0]?.date
       const entries = [
@@ -63,7 +73,60 @@ function sitemap() {
   }
 }
 
+// Emits rss.xml from the same posts, so readers can follow the lab journal
+// without depending on a social feed surfacing it.
+function rss() {
+  return {
+    name: 'generate-rss',
+    apply: 'build',
+    generateBundle() {
+      const posts = readPosts()
+
+      // RFC 822 is what RSS requires; the frontmatter dates are bare calendar
+      // days, so they are pinned to UTC midnight before formatting.
+      const toRfc822 = (date) => new Date(`${date}T00:00:00Z`).toUTCString()
+
+      const items = posts
+        .map((post) => {
+          const url = `${SITE_URL}/blog/${post.slug}`
+          return [
+            '    <item>',
+            `      <title>${escapeXml(post.title ?? post.slug)}</title>`,
+            `      <link>${escapeXml(url)}</link>`,
+            `      <guid isPermaLink="true">${escapeXml(url)}</guid>`,
+            `      <pubDate>${toRfc822(post.date)}</pubDate>`,
+            `      <description>${escapeXml(toExcerpt(post.body, 300))}</description>`,
+            '    </item>',
+          ].join('\n')
+        })
+        .join('\n')
+
+      const lastBuildDate = posts[0] ? toRfc822(posts[0].date) : new Date().toUTCString()
+
+      this.emitFile({
+        type: 'asset',
+        fileName: 'rss.xml',
+        source: [
+          '<?xml version="1.0" encoding="UTF-8"?>',
+          '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
+          '  <channel>',
+          `    <title>${escapeXml(`${SITE_TITLE} - Blog`)}</title>`,
+          `    <link>${escapeXml(`${SITE_URL}/blog`)}</link>`,
+          `    <description>${escapeXml(FEED_DESCRIPTION)}</description>`,
+          '    <language>en-us</language>',
+          `    <lastBuildDate>${lastBuildDate}</lastBuildDate>`,
+          `    <atom:link href="${escapeXml(`${SITE_URL}/rss.xml`)}" rel="self" type="application/rss+xml" />`,
+          items,
+          '  </channel>',
+          '</rss>',
+          '',
+        ].join('\n'),
+      })
+    },
+  }
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), sitemap()],
+  plugins: [react(), sitemap(), rss()],
 })

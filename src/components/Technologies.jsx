@@ -1,10 +1,6 @@
-import {RiReactjsLine} from "react-icons/ri";
-import {TbBrandNextjs} from "react-icons/tb";
-import {SiMongodb} from "react-icons/si";
-import {DiRedis} from "react-icons/di";
-import {FaNodeJs} from "react-icons/fa";
-import {BiLogoPostgresql} from "react-icons/bi";
-import{motion} from "framer-motion";
+import { FaDocker, FaEye, FaLinux, FaShieldAlt, FaWindows } from "react-icons/fa";
+import { SiApache, SiMariadb, SiNextcloud, SiPowershell, SiRaspberrypi } from "react-icons/si";
+import { motion } from "framer-motion";
 
 const iconVariants = (duration) => ({
     initial: {y: -10},
@@ -20,14 +16,35 @@ const iconVariants = (duration) => ({
 
 })
 
-// Each icon carries a label so the section is not silent to a screen reader.
+// The stack actually built and documented in the home lab. The visible label is
+// the accessible name, so the icons themselves are hidden from screen readers.
 const TECHNOLOGIES = [
-  { label: "React", Icon: RiReactjsLine, color: "text-cyan-400", duration: 2.5 },
-  { label: "Next.js", Icon: TbBrandNextjs, color: "text-white", duration: 3 },
-  { label: "MongoDB", Icon: SiMongodb, color: "text-green-500", duration: 5 },
-  { label: "Redis", Icon: DiRedis, color: "text-red-700", duration: 2 },
-  { label: "Node.js", Icon: FaNodeJs, color: "text-green-500", duration: 7 },
-  { label: "PostgreSQL", Icon: BiLogoPostgresql, color: "text-sky-700", duration: 5.5 },
+  { label: "Active Directory", Icon: FaWindows, color: "text-sky-400", duration: 2.5 },
+  { label: "Wazuh", Icon: FaShieldAlt, color: "text-teal-400", duration: 3 },
+  { label: "Sysmon", Icon: FaEye, color: "text-purple-400", duration: 5 },
+  { label: "Linux", Icon: FaLinux, color: "text-amber-400", duration: 2 },
+  { label: "Docker", Icon: FaDocker, color: "text-blue-400", duration: 7 },
+  { label: "Raspberry Pi", Icon: SiRaspberrypi, color: "text-rose-400", duration: 5.5 },
+  { label: "PowerShell", Icon: SiPowershell, color: "text-blue-300", duration: 4 },
+  { label: "MariaDB", Icon: SiMariadb, color: "text-orange-300", duration: 6 },
+  { label: "Apache", Icon: SiApache, color: "text-red-400", duration: 3.5 },
+  { label: "Nextcloud", Icon: SiNextcloud, color: "text-sky-300", duration: 4.5 },
+];
+
+// Real parts of the lab that have no recognisable icon of their own.
+const ALSO_USING = [
+  "Windows Server 2022",
+  "Windows 11",
+  "Group Policy",
+  "Custom SIEM detection rules",
+  "Windows Event Log analysis",
+  "osTicket",
+  "Docker Compose",
+  "Pi-hole",
+  "VirtualBox",
+  "Bash",
+  "Redis",
+  "cron",
 ];
 
 const Technologies = () => {
@@ -43,19 +60,41 @@ const Technologies = () => {
   initial={{opacity: 0, x: -100}}
   transition={{duration: 1.5}}
   viewport={{ once: true }}
-  className="flex flex-wrap items-center justify-center gap-4">
+  className="flex flex-wrap items-start justify-center gap-4">
     {TECHNOLOGIES.map(({ label, Icon, color, duration }) => (
       <motion.li
         key={label}
         variants={iconVariants(duration)}
         initial="initial"
         animate="animate"
-        className="rounded-2xl border-4 border-neutral-800 p-4"
+        className="flex w-28 flex-col items-center gap-2"
       >
-        <Icon className={`text-7xl ${color}`} title={label} role="img" />
+        <span className="rounded-2xl border-4 border-neutral-800 p-4">
+          <Icon className={`text-6xl ${color}`} aria-hidden="true" />
+        </span>
+        <span className="text-center text-sm text-neutral-400">{label}</span>
       </motion.li>
     ))}
   </motion.ul>
+
+  <motion.div
+  whileInView={{opacity:1, y:0}}
+  initial={{opacity: 0, y: 40}}
+  transition={{duration: 1}}
+  viewport={{ once: true }}
+  className="mx-auto mt-12 max-w-3xl px-4"
+  >
+    <h3 className="mb-4 text-center text-sm uppercase tracking-widest text-neutral-500">
+      Also working with
+    </h3>
+    <ul className="flex flex-wrap justify-center gap-2">
+      {ALSO_USING.map((item) => (
+        <li key={item} className="rounded bg-neutral-900 px-3 py-1 text-sm text-neutral-300">
+          {item}
+        </li>
+      ))}
+    </ul>
+  </motion.div>
   </div>
   )
 }

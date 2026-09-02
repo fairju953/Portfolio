@@ -1,7 +1,7 @@
 ---
 title: "Hunting in Wazuh: my first SOC investigations"
 date: "2026-09-01"
-tags: ["Homelab", "Wazuh", "SOC", "Sysmon", "osTicket", "Cybersecurity"]
+tags: ["Homelab", "Wazuh", "SOC", "Sysmon", "osTicket"]
 ---
 
 In June I wrote about getting Wazuh and Sysmon standing. This past stretch of lab time was different: I stopped adding tools and started working like an analyst.

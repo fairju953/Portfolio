@@ -1,4 +1,4 @@
-import { FaGithub, FaInstagram, FaLinkedin, FaTwitterSquare } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 // Shared by the navbar and the footer so both stay in sync. Every entry needs
 // a label: these render as icon-only links, and the label is the only
@@ -13,15 +13,5 @@ export const SOCIAL_LINKS = [
     label: "GitHub",
     href: "https://github.com/fairju953",
     Icon: FaGithub,
-  },
-  {
-    label: "Instagram",
-    href: "https://instagram.com",
-    Icon: FaInstagram,
-  },
-  {
-    label: "X (Twitter)",
-    href: "https://twitter.com",
-    Icon: FaTwitterSquare,
   },
 ];

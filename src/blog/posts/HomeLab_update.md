@@ -1,7 +1,7 @@
 ---
 title: "Adding Wazuh and strengthening osTicket"
 date: "2026-06-08"
-tags: ["Homelab", "Wazuh", "Sysmon", "Active Directory", "Cybersecurity", "IT Support"]
+tags: ["Homelab", "Wazuh", "Sysmon", "Active Directory", "osTicket"]
 ---
 
 It's been a little while since my last post, but I've been busy making some major upgrades to my homelab.

@@ -16,15 +16,17 @@ const Contact = () => {
      transition={{duration:1}}
      viewport={{ once: true }}
     className="my-4">{CONTACT.address}</motion.p>
-    <motion.p 
-    whileInView={{opacity:1, x:0}}
-    initial={{opacity:0, x: 100}}
-    transition={{duration:1}}
-    viewport={{ once: true }}
-    className="my-4">
-      <a href={`tel:${CONTACT.phoneNo.replace(/[^\d+]/g, "")}`} className="border-b hover:text-cyan-400 transition">{CONTACT.phoneNo.trim()}</a>
-    </motion.p>
     <a href={`mailto:${CONTACT.email}`} className="border-b hover:text-cyan-400 transition">{CONTACT.email}</a>
+   <p className="mt-4">
+     <a
+       href="/resume.pdf"
+       target="_blank"
+       rel="noopener noreferrer"
+       className="border-b hover:text-cyan-400 transition"
+     >
+       View résumé (PDF)
+     </a>
+   </p>
    <p className="mt-4">
      <a
        href={`https://${CONTACT.Linkedin.replace(/^https?:\/\//, "")}`}

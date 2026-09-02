@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { posts } from "./posts";
+import { formatDate } from "./formatDate";
 import { useSeo } from "../seo/useSeo";
 import { toExcerpt } from "../seo/excerpt";
 import { OG_IMAGE, SITE_NAME, SITE_URL } from "../seo/siteMeta";
@@ -65,20 +66,26 @@ const BlogPost = () => {
 
         {/* Meta */}
         <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-400 mb-6">
-          <span>{post.date}</span>
+          <span>
+            <time dateTime={post.date}>{formatDate(post.date)}</time>
+            <span aria-hidden="true"> · </span>
+            {post.readingMinutes} min read
+          </span>
 
           {/* Tags */}
           {post.tags && (
-            <div className="flex gap-2">
+            <ul className="flex flex-wrap gap-2 list-none p-0 m-0">
               {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 text-xs rounded-full bg-neutral-800 text-neutral-300"
-                >
-                  {tag}
-                </span>
+                <li key={tag} className="p-0 m-0">
+                  <Link
+                    to={`/blog?tag=${encodeURIComponent(tag)}`}
+                    className="no-underline px-3 py-1 text-xs rounded-full bg-neutral-800 text-neutral-300 transition hover:text-cyan-400"
+                  >
+                    {tag}
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
           )}
         </div>
 

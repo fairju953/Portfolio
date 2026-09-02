@@ -1,7 +1,7 @@
 ---
 title: "Nextcloud and jbtechbyte.com"
 date: "2026-08-11"
-tags: ["IT Support", "Help Desk", "Troubleshooting"]
+tags: ["Homelab", "Docker", "Nextcloud", "Backups"]
 ---
 
 ## Homelab Update

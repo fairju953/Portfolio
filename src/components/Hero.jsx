@@ -27,7 +27,7 @@ const Hero = () => {
           initial="hidden"
           animate="visible"
           className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-transparent text-3xl tracking-tight px-10">
-            IT Support & Systems Professional | Technical Troubleshooting | Cybersecurity Fundamentals
+            IT Support & Security Operations | Active Directory · Wazuh SIEM · Help Desk
           </motion.span>
           <motion.p 
           variants={container(1)}
@@ -36,6 +36,21 @@ const Hero = () => {
           className="text-white my-2 max-w-xl py-6 font-light px-10">
             {HERO_CONTENT}
           </motion.p>
+          <motion.div
+          variants={container(1.3)}
+          initial="hidden"
+          animate="visible"
+          className="px-10"
+          >
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block rounded border border-neutral-400 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800"
+            >
+              View résumé (PDF)
+            </a>
+          </motion.div>
         </div>
 
     
