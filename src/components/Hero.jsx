@@ -5,32 +5,38 @@ import { heroEnter } from "../motion";
 
 const Hero = () => {
   return (
-    <div className="border-b border-neutral-900 pb-4">
-      <div className="flex flex-wrap items-center">
-        {/* Left side - Text content */}
-        <div className="w-full lg:w-1/2 flex flex-col items-start lg:pr-8">
+    <div className="border-b border-stone-200/80 pb-16">
+      <div className="flex flex-col items-center gap-6 md:flex-row md:items-center md:justify-start md:gap-8">
+        <div className="flex flex-col items-start">
           <motion.h1
             variants={heroEnter(0)}
             initial="hidden"
             animate="visible"
-            className="text-white pb-5 text-6xl font-thin tracking-tight lg:mt-16 lg:text-8xl px-7"
+            className="pb-5 text-5xl font-semibold tracking-tight text-slate-900 lg:mt-8 lg:text-7xl"
           >
             Justin Fair
           </motion.h1>
-          <motion.span
+          <motion.p
             variants={heroEnter(0.5)}
             initial="hidden"
             animate="visible"
-            className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-transparent text-3xl tracking-tight px-10"
+            className="max-w-xl text-xl font-medium text-teal-800"
           >
-            IT Support & Security Operations | Active Directory · Wazuh SIEM ·
-            Help Desk
-          </motion.span>
+            IT Support & Security Operations
+          </motion.p>
+          <motion.p
+            variants={heroEnter(0.7)}
+            initial="hidden"
+            animate="visible"
+            className="mt-2 text-base text-slate-600"
+          >
+            Active Directory · Wazuh SIEM · Help Desk
+          </motion.p>
           <motion.p
             variants={heroEnter(1)}
             initial="hidden"
             animate="visible"
-            className="text-white my-2 max-w-xl py-6 font-light px-10"
+            className="my-2 max-w-xl py-6 leading-relaxed text-slate-700"
           >
             {HERO_CONTENT}
           </motion.p>
@@ -38,31 +44,34 @@ const Hero = () => {
             variants={heroEnter(1.3)}
             initial="hidden"
             animate="visible"
-            className="px-10"
           >
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block rounded border border-neutral-400 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800"
+              className="inline-block rounded-lg bg-teal-800 px-6 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-teal-700"
             >
               View résumé (PDF)
             </a>
           </motion.div>
         </div>
 
-        <div className="w-full lg:w-1/2 flex justify-start">
-          <motion.img
+        <div className="flex shrink-0 justify-center md:justify-start">
+          <motion.div
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 1.2 }}
-            className="rounded-full max-w-xs lg:max-w-md px-3 lg:ml-20"
-            src={profilePic}
-            alt="Justin Fair"
-            width={300}
-            height={472}
-            fetchPriority="high"
-          />
+            className="h-80 w-56 overflow-hidden rounded-full shadow-xl ring-4 ring-white/80 sm:h-[26rem] sm:w-72"
+          >
+            <img
+              className="h-full w-full object-cover object-top"
+              src={profilePic}
+              alt="Justin Fair"
+              width={300}
+              height={472}
+              fetchPriority="high"
+            />
+          </motion.div>
         </div>
       </div>
     </div>

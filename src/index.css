@@ -4,13 +4,22 @@
 
 :root {
   font-family: "Inter", sans-serif;
+  color-scheme: light;
+  background-color: #f6f4f0;
+  color: #334155;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  background-color: #f6f4f0;
 }
 
 @layer base {
-  /* The browser default focus ring is close to invisible on this dark
-     background, so keyboard users get an explicit high-contrast one. */
+  /* Teal-800 on cream meets contrast; cyan-400 would not. */
   :focus-visible {
-    outline: 2px solid #22d3ee;
+    outline: 2px solid #115e59;
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -25,5 +34,32 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+}
+
+@layer components {
+  /* Soft mesh: cream base with muted teal and slate pools, not a flat fill. */
+  .page-bg {
+    background-color: #f6f4f0;
+    background-image:
+      radial-gradient(
+        ellipse 90% 55% at 8% -8%,
+        rgba(15, 118, 110, 0.16),
+        transparent 58%
+      ),
+      radial-gradient(
+        ellipse 70% 45% at 96% 4%,
+        rgba(71, 85, 105, 0.12),
+        transparent 52%
+      ),
+      radial-gradient(
+        ellipse 55% 40% at 70% 100%,
+        rgba(15, 118, 110, 0.1),
+        transparent 55%
+      );
+  }
+
+  .surface {
+    @apply rounded-2xl border border-stone-200/80 bg-white/75 shadow-sm backdrop-blur-sm;
   }
 }

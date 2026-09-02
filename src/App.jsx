@@ -48,28 +48,25 @@ const App = () => {
       <MotionConfig reducedMotion="user">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-neutral-800 focus:px-4 focus:py-2 focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-teal-800 focus:px-4 focus:py-2 focus:text-white"
         >
           Skip to main content
         </a>
 
-        {/* Background */}
-        <div className="fixed inset-0 -z-10 bg-neutral-900">
-          <div className="absolute inset-0 bg-fuchsia-400 opacity-20 blur-[120px]" />
-        </div>
+        <div className="page-bg fixed inset-0 -z-10" />
 
-        {/* App Content */}
-        <div className="relative container mx-auto px-8 py-10 text-neutral-300">
-          <Navbar />
+        <header className="sticky top-0 z-40 border-b border-stone-200/70 bg-[#f6f4f0]/75 backdrop-blur-md">
+          <div className="container mx-auto px-8">
+            <Navbar />
+          </div>
+        </header>
 
+        <div className="relative container mx-auto px-8 py-10 text-slate-700">
           <main id="main">
             <ErrorBoundary>
               <Suspense
                 fallback={
-                  <p
-                    className="py-20 text-center text-neutral-400"
-                    role="status"
-                  >
+                  <p className="py-20 text-center text-slate-600" role="status">
                     Loading...
                   </p>
                 }

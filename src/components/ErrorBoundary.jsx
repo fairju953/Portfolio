@@ -14,14 +14,14 @@ class ErrorBoundaryInner extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="py-32 text-center text-white">
+        <div className="py-32 text-center text-slate-900">
           <h1 className="text-2xl font-semibold">Something went wrong</h1>
-          <p className="mt-4 text-neutral-400">
+          <p className="mt-4 text-slate-600">
             Refresh the page, or go back home.
           </p>
           <Link
             to="/"
-            className="mt-6 inline-block border-b border-neutral-400 transition hover:text-cyan-400"
+            className="mt-6 inline-block border-b border-slate-400 transition hover:text-teal-800"
           >
             Go home
           </Link>

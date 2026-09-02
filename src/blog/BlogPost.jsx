@@ -40,11 +40,11 @@ const BlogPost = () => {
 
   if (!post) {
     return (
-      <div className="text-white text-center mt-20">
+      <div className="mt-20 text-center text-slate-900">
         <p>Post not found</p>
         <Link
           to="/blog"
-          className="mt-6 inline-block border-b border-neutral-400 hover:text-cyan-400 transition"
+          className="mt-6 inline-block border-b border-slate-400 transition hover:text-teal-800"
         >
           Back to all posts
         </Link>
@@ -54,10 +54,10 @@ const BlogPost = () => {
 
   return (
     <div className="flex justify-center px-4 py-12">
-      <article className="prose prose-invert max-w-3xl w-full">
+      <article className="prose prose-slate w-full max-w-3xl prose-a:text-teal-800 prose-headings:text-slate-900">
         <Link
           to="/blog"
-          className="no-underline text-sm text-neutral-400 hover:text-cyan-400 transition"
+          className="text-sm text-slate-600 no-underline transition hover:text-teal-800"
         >
           &larr; Back to all posts
         </Link>
@@ -66,7 +66,7 @@ const BlogPost = () => {
         <h1 className="mb-2 mt-6">{post.title}</h1>
 
         {/* Meta */}
-        <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-400 mb-6">
+        <div className="mb-6 flex flex-wrap items-center gap-4 text-sm text-slate-600">
           <span>
             <time dateTime={post.date}>{formatDate(post.date)}</time>
             <span aria-hidden="true"> · </span>
@@ -80,7 +80,7 @@ const BlogPost = () => {
                 <li key={tag} className="p-0 m-0">
                   <Link
                     to={`/blog?tag=${encodeURIComponent(tag)}`}
-                    className="no-underline px-3 py-1 text-xs rounded-full bg-neutral-800 text-neutral-300 transition hover:text-cyan-400"
+                    className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 no-underline transition hover:text-teal-800"
                   >
                     {tag}
                   </Link>
@@ -91,7 +91,7 @@ const BlogPost = () => {
         </div>
 
         {/* Divider */}
-        <hr className="border-neutral-800 mb-8" />
+        <hr className="mb-8 border-slate-200" />
 
         {/* Content */}
         <div className="leading-relaxed">

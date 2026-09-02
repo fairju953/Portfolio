@@ -26,9 +26,9 @@ const Blog = () => {
   });
 
   return (
-    <div className="text-white">
+    <div className="text-slate-900">
       <h1 className="mb-4 text-4xl font-bold">Blog</h1>
-      <p className="mb-8 max-w-2xl text-neutral-400">
+      <p className="mb-8 max-w-2xl text-slate-600">
         Notes from the home lab, including the parts that did not work the first
         time.
       </p>
@@ -41,8 +41,8 @@ const Blog = () => {
               aria-current={activeTag ? undefined : "true"}
               className={`inline-block rounded-full px-3 py-1 text-sm transition ${
                 activeTag
-                  ? "bg-neutral-900 text-neutral-300 hover:text-cyan-400"
-                  : "bg-cyan-400 font-medium text-neutral-900"
+                  ? "bg-slate-100 text-slate-700 hover:text-teal-800"
+                  : "bg-teal-800 font-medium text-white"
               }`}
             >
               All {sortedPosts.length}
@@ -55,8 +55,8 @@ const Blog = () => {
                 aria-current={activeTag === tag ? "true" : undefined}
                 className={`inline-block rounded-full px-3 py-1 text-sm transition ${
                   activeTag === tag
-                    ? "bg-cyan-400 font-medium text-neutral-900"
-                    : "bg-neutral-900 text-neutral-300 hover:text-cyan-400"
+                    ? "bg-teal-800 font-medium text-white"
+                    : "bg-slate-100 text-slate-700 hover:text-teal-800"
                 }`}
               >
                 {tag} {count}
@@ -67,9 +67,9 @@ const Blog = () => {
       </nav>
 
       {visiblePosts.length === 0 ? (
-        <p className="text-neutral-400">
+        <p className="text-slate-600">
           No posts tagged &ldquo;{activeTag}&rdquo;.{" "}
-          <Link to="/blog" className="text-cyan-400 hover:underline">
+          <Link to="/blog" className="text-teal-800 hover:underline">
             Show all posts
           </Link>
           .
@@ -79,24 +79,24 @@ const Blog = () => {
           {visiblePosts.map((post) => (
             <li
               key={post.slug}
-              className="border-b border-neutral-800 pb-8 last:border-b-0"
+              className="border-b border-stone-200/80 pb-8 last:border-b-0"
             >
               <h2 className="mb-2 text-xl font-semibold">
                 <Link
                   to={`/blog/${post.slug}`}
-                  className="text-cyan-400 hover:underline"
+                  className="text-teal-800 hover:underline"
                 >
                   {post.title}
                 </Link>
               </h2>
 
-              <p className="mb-3 text-sm text-neutral-400">
+              <p className="mb-3 text-sm text-slate-600">
                 <time dateTime={post.date}>{formatDate(post.date)}</time>
                 <span aria-hidden="true"> · </span>
                 {post.readingMinutes} min read
               </p>
 
-              <p className="max-w-2xl text-neutral-300">{post.excerpt}</p>
+              <p className="max-w-2xl text-slate-700">{post.excerpt}</p>
             </li>
           ))}
         </ul>
