@@ -1,8 +1,4 @@
-export const HERO_CONTENT = `I am an IT professional focused on technical support and security operations. I hold a B.S. in Information Technology and a CompTIA Security+ certification, and I run a home lab where I operate an Active Directory domain, a Wazuh SIEM collecting Sysmon telemetry from Windows endpoints, and an osTicket help desk that the SIEM files tickets into automatically.
-
-Alongside the lab I built Attack Analyst, a Python RSS pipeline that turns security headlines into structured notes (how the attack worked and how to defend), and ASL Learn (asl.jbtechbyte.com), a Next.js app for looking up American Sign Language videos.
-
-My background is in workers' compensation claims investigation, which is closer to security analysis than it sounds: gather the evidence, read it carefully, and write a verdict you can defend. I also work with React, Node.js, MySQL, Java, and PHP, which helps me diagnose application problems and communicate clearly with development teams.`;
+export const HERO_CONTENT = `IT professional moving into security operations. I hold a B.S. in Information Technology and CompTIA Security+, and I document a home lab plus apps I built — Attack Analyst and ASL Learn.`;
 
 export const ABOUT_TEXT = `I am moving from insurance claims into IT support and security operations, and I am doing it in the open: everything I build, break, and fix gets written up on this site. The home lab currently runs a Windows Server 2022 domain controller with Group Policy, a Wazuh SIEM collecting Sysmon telemetry from Windows endpoints, detection rules I wrote myself for PowerShell execution-policy bypasses, an osTicket queue on a Raspberry Pi that the SIEM files tickets into, and a self-hosted Nextcloud stack on Docker Compose with automated, verified backups. Outside the lab I built Attack Analyst (RSS security stories turned into attack-method and defense notes) and ASL Learn (a Next.js study aid for finding ASL sign videos). Six years of investigating workers' compensation claims taught me the habit that matters most in a SOC: follow the evidence to a conclusion you can defend in writing, and stay honest about the difference between something hostile and something you simply have not explained yet. I hold a B.S. in Information Technology from Kean University and a CompTIA Security+ certification, and I also work with React, Node.js, MySQL, Java, and PHP, which helps me diagnose application issues and speak the same language as development teams.`;
 
@@ -85,6 +81,9 @@ Carried out all assigned administrative duties that aligned to the production sc
 export const PROJECTS = [
   {
     title: "Attack Analyst — RSS threat-intel study notes",
+    kind: "app",
+    summary:
+      "Python RSS pipeline that turns security headlines into structured notes: what happened, how the attack worked, how to defend, and what I would hunt in a SIEM. Research only — no samples.",
     description:
       "Personal pipeline that pulls security RSS feeds, ranks recent stories, and writes a digest plus deeper markdown writeups. Each story covers what happened, how the attack worked, defenses (patch versus compensating control), and an honest mapping to what I would look for in Wazuh or Sysmon. Research only: no malware samples, lure sites, or exploit steps.",
     technologies: [
@@ -99,6 +98,9 @@ export const PROJECTS = [
   },
   {
     title: "ASL Web App — A tool for helping aspiring ASL learners",
+    kind: "app",
+    summary:
+      "Next.js study aid for hearing learners to search ASL sign videos, save study cards, and practice. Guests can search; accounts use a hashed password. Not a substitute for Deaf-led instruction.",
     description:
       "Next.js app for hearing learners to search ASL sign videos from YouTube and Spread the Sign, watch them inline, and save study cards to an account. Search maps typos and short forms to a canonical term. Guests can search and watch; study and practice require a sign-in with a hashed password and a session cookie. Built as a study aid, not a replacement for Deaf-led instruction.",
     technologies: [
@@ -116,6 +118,9 @@ export const PROJECTS = [
   },
   {
     title: "SOC Monitoring and Detection Engineering with Wazuh",
+    kind: "soc",
+    summary:
+      "Wazuh SIEM with Sysmon on a domain controller and a Windows 11 client. Custom PowerShell-bypass rules, case-file triage, and true vs false vs benign true positives.",
     description:
       "Built a working detection and investigation loop on top of a Wazuh SIEM, with agents and Sysmon reporting from a Windows Server 2022 domain controller and a Windows 11 workstation. Wrote custom rules 100110 and 100111 to catch PowerShell executed with an execution-policy bypass or an encoded command, escalating when it runs at High or System integrity, because the stock rule only fired on nested PowerShell. Investigated the resulting alerts as case files, triaging Event IDs 4625, 4720 and 4698 and separating true positives from false positives and benign true positives by reading the underlying fields rather than the rule description.",
     technologies: [
@@ -130,6 +135,9 @@ export const PROJECTS = [
   },
   {
     title: "Help Desk Ticketing with Alert-to-Ticket Automation",
+    kind: "soc",
+    summary:
+      "osTicket on a Raspberry Pi, then Wazuh alerts at level 12+ open tickets automatically. The install failed until a Pi-hole versus Apache port conflict was traced.",
     description:
       "Deployed osTicket on a Raspberry Pi over Apache, PHP and MariaDB to act as the queue for the lab. The install appeared broken until methodical troubleshooting traced it to a port conflict: Pi-hole already held port 80, so Apache had been pushed to 8080 and every request was reaching the wrong service. Later connected Wazuh to osTicket so that any alert at level 12 or above opens a ticket automatically, giving each serious detection a tracked path from alarm to written verdict.",
     technologies: [
@@ -146,6 +154,9 @@ export const PROJECTS = [
   },
   {
     title: "Active Directory Domain Lab",
+    kind: "soc",
+    summary:
+      "Windows Server 2022 domain controller and Windows 11 client in VirtualBox. A rejected password traced to a 14-character Group Policy I chose to meet rather than weaken.",
     description:
       "Built and maintain a Windows Server 2022 domain controller with a Windows 11 client in VirtualBox, used for user and system administration practice. Diagnosed a rejected password by tracing it through Group Policy Management to a 14-character minimum in the Default Domain Policy, then chose to meet the policy rather than weaken it so the lab keeps a realistic security baseline.",
     technologies: [
@@ -160,6 +171,9 @@ export const PROJECTS = [
   },
   {
     title: "Self-Hosted Nextcloud with Automated Backups",
+    kind: "soc",
+    summary:
+      "Nextcloud on Docker Compose with MariaDB, Redis, health checks, and cron backups kept as separate database, file, and configuration sets.",
     description:
       "Runs Nextcloud with MariaDB and Redis under Docker Compose, with database credentials moved out of the compose file into environment configuration, health checks on MariaDB, and explicit container dependency ordering so services start in the right sequence. Backups are automated on cron with error handling and verification, kept as separate database, file and configuration sets rather than one opaque archive.",
     technologies: [

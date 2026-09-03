@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { HERO_CONTENT } from "../constants";
 import profilePic from "../assets/pic.webp";
 import { motion } from "framer-motion";
@@ -36,7 +37,7 @@ const Hero = () => {
             variants={heroEnter(1)}
             initial="hidden"
             animate="visible"
-            className="my-2 max-w-xl py-6 leading-relaxed text-slate-700"
+            className="my-2 max-w-xl py-5 leading-relaxed text-slate-700"
           >
             {HERO_CONTENT}
           </motion.p>
@@ -44,6 +45,7 @@ const Hero = () => {
             variants={heroEnter(1.3)}
             initial="hidden"
             animate="visible"
+            className="flex flex-wrap gap-3"
           >
             <a
               href="/resume.pdf"
@@ -53,6 +55,12 @@ const Hero = () => {
             >
               View résumé (PDF)
             </a>
+            <Link
+              to="/blog"
+              className="inline-block rounded-lg border border-slate-400 px-6 py-3 text-sm font-medium text-slate-900 transition hover:bg-white/80"
+            >
+              Read the blog
+            </Link>
           </motion.div>
         </div>
 

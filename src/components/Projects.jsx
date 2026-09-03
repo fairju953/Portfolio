@@ -6,9 +6,14 @@ import { fadeUp, sectionTitle } from "../motion";
 const linkClass =
   "inline-flex items-center gap-1 text-sm font-medium text-teal-800 underline underline-offset-4 hover:text-teal-700";
 
+const kindLabel = {
+  app: "App",
+  soc: "SOC lab",
+};
+
 const Projects = () => {
   return (
-    <div className="border-b border-stone-200/80 pb-4">
+    <div id="projects" className="border-b border-stone-200/80 pb-4">
       <motion.h2
         {...sectionTitle}
         className="my-20 text-center text-4xl text-slate-900"
@@ -17,22 +22,28 @@ const Projects = () => {
       </motion.h2>
 
       <p className="mx-auto mb-12 max-w-3xl px-4 text-center text-slate-600">
-        Everything below is work I built and documented. Home-lab SOC projects
-        sit next to apps (threat-intel notes and ASL Learn). Each card links to
-        the writeup; live apps also link out.
+        Home-lab SOC work next to apps I shipped. Each card links to the
+        writeup; live apps also link out.
       </p>
 
-      <div className="mx-auto max-w-4xl px-4">
+      <div className="mx-auto grid max-w-5xl gap-6 px-4 md:grid-cols-2">
         {PROJECTS.map((project) => (
           <motion.article
             key={project.title}
             {...fadeUp}
-            className="surface mb-8 p-6"
+            className="surface flex h-full flex-col p-6 transition hover:-translate-y-0.5 hover:shadow-md"
           >
+            {project.kind && (
+              <p className="mb-3 text-xs font-medium uppercase tracking-widest text-teal-800">
+                {kindLabel[project.kind] ?? project.kind}
+              </p>
+            )}
             <h3 className="mb-3 text-xl font-semibold text-slate-900">
               {project.title}
             </h3>
-            <p className="mb-4 text-slate-600">{project.description}</p>
+            <p className="mb-4 flex-1 text-slate-600">
+              {project.summary ?? project.description}
+            </p>
 
             <ul className="mb-4 flex flex-wrap gap-2">
               {project.technologies.map((tech) => (
