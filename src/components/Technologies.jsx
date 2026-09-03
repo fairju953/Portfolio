@@ -15,8 +15,9 @@ import {
 import { motion } from "framer-motion";
 import { bob, fadeUp, fromLeft, sectionTitle } from "../motion";
 
-// The stack actually built and documented in the home lab. The visible label is
-// the accessible name, so the icons themselves are hidden from screen readers.
+// The stack actually built and documented (home lab plus independent apps).
+// The visible label is the accessible name, so the icons themselves are hidden
+// from screen readers.
 const TECHNOLOGIES = [
   {
     label: "Active Directory",
@@ -64,6 +65,11 @@ const ALSO_USING = [
   "Bash",
   "Redis",
   "cron",
+  "Python",
+  "RSS",
+  "Next.js",
+  "React",
+  "Prisma",
 ];
 
 const Technologies = () => {

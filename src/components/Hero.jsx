@@ -30,7 +30,7 @@ const Hero = () => {
             animate="visible"
             className="mt-2 text-base text-slate-600"
           >
-            Active Directory · Wazuh SIEM · Help Desk
+            Active Directory · Wazuh SIEM · Help Desk · App projects
           </motion.p>
           <motion.p
             variants={heroEnter(1)}

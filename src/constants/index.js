@@ -1,8 +1,10 @@
 export const HERO_CONTENT = `I am an IT professional focused on technical support and security operations. I hold a B.S. in Information Technology and a CompTIA Security+ certification, and I run a home lab where I operate an Active Directory domain, a Wazuh SIEM collecting Sysmon telemetry from Windows endpoints, and an osTicket help desk that the SIEM files tickets into automatically.
 
+Alongside the lab I built Attack Analyst, a Python RSS pipeline that turns security headlines into structured notes (how the attack worked and how to defend), and ASL Learn (asl.jbtechbyte.com), a Next.js app for looking up American Sign Language videos.
+
 My background is in workers' compensation claims investigation, which is closer to security analysis than it sounds: gather the evidence, read it carefully, and write a verdict you can defend. I also work with React, Node.js, MySQL, Java, and PHP, which helps me diagnose application problems and communicate clearly with development teams.`;
 
-export const ABOUT_TEXT = `I am moving from insurance claims into IT support and security operations, and I am doing it in the open: everything I build, break, and fix in my home lab gets written up on this site. That lab currently runs a Windows Server 2022 domain controller with Group Policy, a Wazuh SIEM collecting Sysmon telemetry from Windows endpoints, detection rules I wrote myself for PowerShell execution-policy bypasses, an osTicket queue on a Raspberry Pi that the SIEM files tickets into, and a self-hosted Nextcloud stack on Docker Compose with automated, verified backups. Six years of investigating workers' compensation claims taught me the habit that matters most in a SOC: follow the evidence to a conclusion you can defend in writing, and stay honest about the difference between something hostile and something you simply have not explained yet. I hold a B.S. in Information Technology from Kean University and a CompTIA Security+ certification, and I also work with React, Node.js, MySQL, Java, and PHP, which helps me diagnose application issues and speak the same language as development teams.`;
+export const ABOUT_TEXT = `I am moving from insurance claims into IT support and security operations, and I am doing it in the open: everything I build, break, and fix gets written up on this site. The home lab currently runs a Windows Server 2022 domain controller with Group Policy, a Wazuh SIEM collecting Sysmon telemetry from Windows endpoints, detection rules I wrote myself for PowerShell execution-policy bypasses, an osTicket queue on a Raspberry Pi that the SIEM files tickets into, and a self-hosted Nextcloud stack on Docker Compose with automated, verified backups. Outside the lab I built Attack Analyst (RSS security stories turned into attack-method and defense notes) and ASL Learn (a Next.js study aid for finding ASL sign videos). Six years of investigating workers' compensation claims taught me the habit that matters most in a SOC: follow the evidence to a conclusion you can defend in writing, and stay honest about the difference between something hostile and something you simply have not explained yet. I hold a B.S. in Information Technology from Kean University and a CompTIA Security+ certification, and I also work with React, Node.js, MySQL, Java, and PHP, which helps me diagnose application issues and speak the same language as development teams.`;
 
 export const EDUCATION = [
   {
@@ -32,6 +34,20 @@ Manage complex claim workflows by coordinating with multiple stakeholders, negot
       "Microsoft Office Suite",
       "Claims Processing Software",
       "DMS",
+    ],
+  },
+  {
+    year: "2026",
+    role: "Independent projects",
+    company: "Personal",
+    description: `Built Attack Analyst, a Python RSS pipeline and markdown library that turns cybersecurity headlines into structured study notes: what happened, how the attack worked, how to defend (patch versus compensating control), and what I would hunt in a SIEM. Built ASL Learn, a Next.js app for hearing learners to search American Sign Language videos from YouTube and Spread the Sign, with accounts, study cards, and practice — framed as a study aid, not a substitute for Deaf teachers.`,
+    technologies: [
+      "Python",
+      "RSS",
+      "MITRE ATT&CK",
+      "Next.js",
+      "React",
+      "Prisma",
     ],
   },
   {
@@ -67,6 +83,37 @@ Carried out all assigned administrative duties that aligned to the production sc
 // Each project links to the post where the work was actually documented, so a
 // reader can verify the claim rather than take it on trust.
 export const PROJECTS = [
+  {
+    title: "Attack Analyst — RSS threat-intel study notes",
+    description:
+      "Personal pipeline that pulls security RSS feeds, ranks recent stories, and writes a digest plus deeper markdown writeups. Each story covers what happened, how the attack worked, defenses (patch versus compensating control), and an honest mapping to what I would look for in Wazuh or Sysmon. Research only: no malware samples, lure sites, or exploit steps.",
+    technologies: [
+      "Python",
+      "RSS",
+      "Markdown",
+      "MITRE ATT&CK",
+      "Threat intelligence",
+    ],
+    href: "/blog/attack-analyst-rss-threat-intel",
+    linkLabel: "Read how Attack Analyst works",
+  },
+  {
+    title: "ASL Web App — A tool for helping aspiring ASL learners",
+    description:
+      "Next.js app for hearing learners to search ASL sign videos from YouTube and Spread the Sign, watch them inline, and save study cards to an account. Search maps typos and short forms to a canonical term. Guests can search and watch; study and practice require a sign-in with a hashed password and a session cookie. Built as a study aid, not a replacement for Deaf-led instruction.",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Prisma",
+      "SQLite / Turso",
+      "Tailwind CSS",
+    ],
+    liveHref: "https://asl.jbtechbyte.com",
+    liveLabel: "Open ASL Learn",
+    href: "/blog/asl-learn-web-app",
+    linkLabel: "Read about ASL Learn",
+  },
   {
     title: "SOC Monitoring and Detection Engineering with Wazuh",
     description:

@@ -1,6 +1,6 @@
 # Justin Fair — Portfolio
 
-Personal site for [Justin Fair](https://www.jbtechbyte.com): IT support and security operations, with a file-based blog of home-lab write-ups (Active Directory, Wazuh, osTicket, Nextcloud).
+Personal site for [Justin Fair](https://www.jbtechbyte.com): IT support and security operations, with a file-based blog of home-lab write-ups (Active Directory, Wazuh, osTicket, Nextcloud) plus Attack Analyst and ASL Learn.
 
 ## Stack
 
