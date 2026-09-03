@@ -17,9 +17,9 @@ const Projects = () => {
       </motion.h2>
 
       <p className="mx-auto mb-12 max-w-3xl px-4 text-center text-slate-600">
-        Everything below is work I built and documented. Home-lab SOC
-        projects sit next to apps (threat-intel notes and ASL Learn). Each
-        card links to the writeup; live apps also link out.
+        Everything below is work I built and documented. Home-lab SOC projects
+        sit next to apps (threat-intel notes and ASL Learn). Each card links to
+        the writeup; live apps also link out.
       </p>
 
       <div className="mx-auto max-w-4xl px-4">

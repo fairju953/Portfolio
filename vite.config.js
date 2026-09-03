@@ -9,7 +9,7 @@ import { toExcerpt } from "./src/seo/excerpt.js";
 const SITE_URL = "https://www.jbtechbyte.com";
 const SITE_TITLE = "Justin Fair";
 const FEED_DESCRIPTION =
-  "Write-ups from my home lab (Active Directory, Wazuh, osTicket) plus Attack Analyst and ASL Learn."
+  "Write-ups from my home lab (Active Directory, Wazuh, osTicket) plus Attack Analyst and ASL Learn.";
 
 function escapeXml(value) {
   return value.replace(
