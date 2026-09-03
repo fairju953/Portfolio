@@ -5,7 +5,7 @@ import { fromLeft, fromRight } from "../motion";
 
 const About = () => {
   return (
-    <div className="border-b border-stone-200/80 pb-4">
+    <div id="about" className="border-b border-stone-200/80 pb-4">
       <h2 className="my-20 text-center text-4xl text-slate-900">
         About <span className="text-slate-500">Me</span>
       </h2>

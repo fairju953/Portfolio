@@ -74,7 +74,7 @@ const ALSO_USING = [
 
 const Technologies = () => {
   return (
-    <div className="border-b border-stone-200/80 pb-24">
+    <div id="technologies" className="border-b border-stone-200/80 pb-24">
       <motion.h2
         {...sectionTitle}
         transition={{ duration: 1.5 }}

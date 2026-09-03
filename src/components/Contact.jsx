@@ -4,7 +4,10 @@ import { fromLeft, sectionTitle } from "../motion";
 
 const Contact = () => {
   return (
-    <div className="border-b border-stone-200/80 pb-20 text-slate-900">
+    <div
+      id="contact"
+      className="border-b border-stone-200/80 pb-20 text-slate-900"
+    >
       <motion.h2 {...sectionTitle} className="my-10 text-center text-4xl">
         Get in Touch
       </motion.h2>

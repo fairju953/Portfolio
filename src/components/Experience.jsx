@@ -4,7 +4,7 @@ import { fromLeft, fromRight, sectionTitle } from "../motion";
 
 const Experience = () => {
   return (
-    <div className="border-b border-stone-200/80 pb-4">
+    <div id="experience" className="border-b border-stone-200/80 pb-4">
       <motion.h2
         {...sectionTitle}
         className="my-20 text-center text-4xl text-slate-900"

@@ -1,5 +1,5 @@
-import { lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { MotionConfig } from "framer-motion";
 
 // Layout components
@@ -27,6 +27,18 @@ const BlogPost = lazy(() => import("./blog/BlogPost"));
 // The Person JSON-LD for this route is served statically from index.html.
 const Home = () => {
   useSeo({ title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION, path: "/" });
+  const { hash } = useLocation();
+
+  // Hash links from /blog (and a refresh on /#projects) need an explicit
+  // scroll; the browser will not always do it after the route renders.
+  useEffect(() => {
+    if (!hash) return;
+    const id = hash.slice(1);
+    const node = document.getElementById(id);
+    if (node) {
+      node.scrollIntoView();
+    }
+  }, [hash]);
 
   return (
     <>

@@ -12,7 +12,7 @@ const credentialCard = ({ credential, institution, detail }) => (
 
 const Education = () => {
   return (
-    <div className="border-b border-stone-200/80 pb-4">
+    <div id="education" className="border-b border-stone-200/80 pb-4">
       <motion.h2
         {...sectionTitle}
         className="my-20 text-center text-4xl text-slate-900"

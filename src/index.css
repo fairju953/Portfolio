@@ -16,6 +16,16 @@ body,
   background-color: #f6f4f0;
 }
 
+html {
+  scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 @layer base {
   /* Teal-800 on cream meets contrast; cyan-400 would not. */
   :focus-visible {
