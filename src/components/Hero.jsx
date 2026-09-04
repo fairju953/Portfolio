@@ -23,7 +23,7 @@ const Hero = () => {
             animate="visible"
             className="max-w-xl text-xl font-medium text-teal-800"
           >
-            IT Support & Security Operations
+            From insurance claims into IT, then cybersecurity
           </motion.p>
           <motion.p
             variants={heroEnter(0.7)}

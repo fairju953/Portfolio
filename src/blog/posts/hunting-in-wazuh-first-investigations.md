@@ -4,55 +4,51 @@ date: "2026-09-01"
 tags: ["Homelab", "Wazuh", "SOC", "Sysmon", "osTicket"]
 ---
 
-In June I wrote about getting Wazuh and Sysmon standing. This past stretch of lab time was different: I stopped adding tools and started working like an analyst.
+In June I wrote about getting Wazuh and Sysmon standing. This stretch was different. I stopped adding tools and tried to work an alert the way I think a SOC would.
 
-The loop I am practicing is simple. A high-severity alert opens a ticket. I hunt in the **Wazuh Dashboard**, not by grepping logs on the server. I write a short case file with a verdict. Then I close the ticket.
+The process I'm using: a high-severity alert opens a ticket, I hunt in the **Wazuh Dashboard** (not by grepping the server), I write a short case file with a verdict, then I close the ticket.
 
-## Detection that matches the test
+## PowerShell bypass
 
-My first investigation was an authorized PowerShell test: `-ExecutionPolicy Bypass` and `Get-Process` on the Windows 11 workstation, run as Administrator.
+First investigation was a test I ran on purpose: PowerShell with `-ExecutionPolicy Bypass` and `Get-Process` on the Windows 11 box, as Administrator.
 
-Stock Wazuh fired on **nested PowerShell** (one `powershell.exe` starting another). That was useful, but it was not the behavior I cared about. Bypass can happen even when the parent is `cmd.exe`.
+Stock Wazuh fired on **nested PowerShell** (one `powershell.exe` starting another). That's useful, but it isn't what I cared about. Bypass can happen even when the parent is `cmd.exe`.
 
-I added two custom rules:
+So I added two custom rules:
 
 - **100110** — PowerShell with Bypass or an encoded command (medium)
-- **100111** — the same, at High or System integrity (high)
+- **100111** — the same thing at High or System integrity (high)
 
-The second one fired on the lab command at level 12. That is a **benign true positive**: the detection is right, and I did it on purpose. Harmless `Get-Process` does not make it a false positive.
+The second one fired on my lab command at level 12. The detection is right. I did it on purpose. Harmless `Get-Process` doesn't make it a false positive. That's a benign true positive.
 
-## Tickets for the serious alerts
+## Tickets for the serious stuff
 
-osTicket on the Raspberry Pi is the queue, not the SIEM. I wired Wazuh so **level 12 and above** can open a ticket automatically.
+osTicket on the Pi is the queue, not the SIEM. I wired Wazuh so **level 12 and above** can open a ticket on their own.
 
-That path took some help-desk style troubleshooting (API client fields, then a Windows copy that left the wrong line endings on the integrator script). Once it worked, the Bypass alert became a ticket I could work like a queue item: hunt in the Dashboard, then close with a verdict.
+That took some help-desk style digging (API client fields, then a Windows copy that left the wrong line endings on the integrator script). Once it worked, the Bypass alert became a ticket I could work: hunt in the Dashboard, close with a verdict.
 
-A second ticket came from rule **92213** — “executable dropped in a folder commonly used by malware.” The rule title sounds like command-and-control. The file was `__PSScriptPolicyTest_….ps1` in Temp. Windows PowerShell writes that file to check execution policy. Same second as the Bypass test. **False positive.**
+A second ticket came from rule **92213**, "executable dropped in a folder commonly used by malware." The title sounds like command-and-control. The file was `__PSScriptPolicyTest_….ps1` in Temp. Windows PowerShell writes that file to check execution policy. Same second as the Bypass test. False positive.
 
-The lesson I keep repeating: read the **field**, not the scary description. For file-create alerts that field is `targetFilename`. For process alerts it is `commandLine`.
+Thing I keep catching myself on: read the **field**, not the scary description. For file-create alerts that's `targetFilename`. For process alerts it's `commandLine`.
 
 ## Failed logons are not all brute force
 
 Investigation #2 was Windows Event **4625**. Four events on the domain controller were not one attack.
 
-Three had status `0xC0000133` — clocks too far apart (VirtualBox VMs pause and drift). One had `0xC000006D` / `0xC000006A` — the user exists, the password is wrong, from localhost, on a known lab account. One mistype is not a spray.
+Three had status `0xC0000133`, clocks too far apart. VirtualBox VMs pause and the time drifts. One had `0xC000006D` / `0xC000006A`: the user exists, the password is wrong, from localhost, on a known lab account. One mistype is not a spray.
 
-Wazuh’s generic “unknown user or bad password” rule buckets many 4625s together. The Windows **status** code is what you look up.
+Wazuh's generic "unknown user or bad password" rule dumps a lot of 4625s in one bucket. The Windows **status** code is what you look up.
 
-## Account create and persistence
+## New account and scheduled tasks
 
-I created a clearly named lab user on the DC (**4720**). The new account is a normal Domain User. An administrator **creating** a user is not the same as the new user **being** an admin.
+I created a clearly named lab user on the DC (**4720**). It's a normal Domain User. An admin **creating** a user is not the same as that new user **being** an admin.
 
-For scheduled tasks (**4698**), nothing showed until I turned on **Other Object Access Events** audit on the workstation. After that I had several events: the lab task I created, and a Windows 11 **SoftLanding** task for a domain user. Unfamiliar names get researched before I call them malware.
+For scheduled tasks (**4698**), nothing showed until I turned on **Other Object Access Events** audit on the workstation. After that I had a few events: the lab task I created, and a Windows 11 **SoftLanding** task for a domain user. Unfamiliar names get researched before I call them malware.
 
-## What I am practicing
+## Labels I'm using
 
-| Label                | Meaning                                                             |
-| -------------------- | ------------------------------------------------------------------- |
-| True positive        | Detection is right, and it is hostile (or would be outside the lab) |
-| False positive       | Detection fired, but the pattern is not what the rule is for        |
-| Benign true positive | Detection is right; I (or Windows) did it for a legitimate reason   |
+- **True positive** — detection is right, and it would be hostile outside the lab
+- **False positive** — it fired, but it isn't actually that pattern
+- **Benign true positive** — detection is right; I (or Windows) did it for a real reason
 
-I am not adding Kali or a vulnerable VM yet. Next I am checking whether Wazuh actually **tags** these cases with MITRE ATT&CK in the Dashboard.
-
-The homelab is no longer “what else can I install.” It is “can I investigate this the way a SOC would.”
+I'm not adding Kali or a vulnerable VM yet. Next I want to see whether Wazuh actually tags these with MITRE ATT&CK in the Dashboard.

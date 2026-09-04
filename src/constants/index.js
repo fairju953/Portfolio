@@ -1,6 +1,10 @@
-export const HERO_CONTENT = `IT professional moving into security operations. I hold a B.S. in Information Technology and CompTIA Security+, and I document a home lab plus apps I built — Attack Analyst and ASL Learn.`;
+export const HERO_CONTENT = `I work in insurance claims and I'm moving into IT support, with cybersecurity as the longer goal. I have a B.S. in Information Technology and CompTIA Security+, and I write up the homelab I'm building toward those roles.`;
 
-export const ABOUT_TEXT = `I am moving from insurance claims into IT support and security operations, and I am doing it in the open: everything I build, break, and fix gets written up on this site. The home lab currently runs a Windows Server 2022 domain controller with Group Policy, a Wazuh SIEM collecting Sysmon telemetry from Windows endpoints, detection rules I wrote myself for PowerShell execution-policy bypasses, an osTicket queue on a Raspberry Pi that the SIEM files tickets into, and a self-hosted Nextcloud stack on Docker Compose with automated, verified backups. Outside the lab I built Attack Analyst (RSS security stories turned into attack-method and defense notes) and ASL Learn (a Next.js study aid for finding ASL sign videos). Six years of investigating workers' compensation claims taught me the habit that matters most in a SOC: follow the evidence to a conclusion you can defend in writing, and stay honest about the difference between something hostile and something you simply have not explained yet. I hold a B.S. in Information Technology from Kean University and a CompTIA Security+ certification, and I also work with React, Node.js, MySQL, Java, and PHP, which helps me diagnose application issues and speak the same language as development teams.`;
+export const ABOUT_TEXT = `I'm a workers' compensation adjuster trying to get into IT support, and later into cybersecurity. I'm putting the work on this site so there's something real to point to besides a degree and a cert.
+
+The homelab right now is a Windows Server 2022 domain controller with Group Policy, Wazuh pulling Sysmon off Windows endpoints, a couple of detection rules I wrote for PowerShell bypasses, osTicket on a Raspberry Pi that Wazuh can file tickets into, and Nextcloud on Docker with backups I actually check. I also built Attack Analyst to turn security news into study notes, and ASL Learn, a small web app for looking up ASL sign videos.
+
+Claims work is a lot of reading a file and writing something you can stand behind, and saying so when you don't have the answer yet. That's the part I want to bring with me. I graduated from Kean with a B.S. in Information Technology and I passed Security+. I also use React, Node, MySQL, Java, and PHP enough to debug an app and not get lost talking to developers.`;
 
 export const EDUCATION = [
   {
@@ -23,9 +27,7 @@ export const EXPERIENCES = [
     year: "2026 - present",
     role: "Workers' Compensation Adjuster",
     company: "Gallagher Bassett",
-    description: `Conduct detailed investigations and analyze documentation to evaluate Workers Compensation claims across New Jersey and Pennsylvania jurisdictions.
-Review medical records, evidence, and regulatory requirements to assess claim validity, determine benefits eligibility, and ensure compliance with state laws and internal procedures.
-Manage complex claim workflows by coordinating with multiple stakeholders, negotiating resolutions, and maintaining accurate documentation and reporting.`,
+    description: `Investigate workers' compensation claims in New Jersey and Pennsylvania. Read medical records and other evidence, decide if the claim is valid and what benefits apply, and keep it in line with state law and company procedures. Coordinate with a lot of people on the file, negotiate resolutions, and keep the documentation straight.`,
     technologies: [
       "Microsoft Office Suite",
       "Claims Processing Software",
@@ -36,7 +38,7 @@ Manage complex claim workflows by coordinating with multiple stakeholders, negot
     year: "2026",
     role: "Independent projects",
     company: "Personal",
-    description: `Built Attack Analyst, a Python RSS pipeline and markdown library that turns cybersecurity headlines into structured study notes: what happened, how the attack worked, how to defend (patch versus compensating control), and what I would hunt in a SIEM. Built ASL Learn, a Next.js app for hearing learners to search American Sign Language videos from YouTube and Spread the Sign, with accounts, study cards, and practice — framed as a study aid, not a substitute for Deaf teachers.`,
+    description: `Built Attack Analyst, a Python RSS pipeline that turns security headlines into notes I can search later: what happened, how the attack worked, how you'd defend, and what I'd look for in a SIEM. Built ASL Learn, a Next.js app for looking up ASL sign videos, saving study cards, and practicing. It's a study aid, not a replacement for Deaf teachers.`,
     technologies: [
       "Python",
       "RSS",
@@ -50,28 +52,28 @@ Manage complex claim workflows by coordinating with multiple stakeholders, negot
     year: "2020 - 2026",
     role: "Workers' Compensation Adjuster",
     company: "NJPLIGA",
-    description: `Evaluate and process WC claims, with investigation, evidence gathering and review of medical records to determine claim validity.
-	Calculate and determine appropriate benefits based on injury severity, medical evidence, and NJ WC State Laws.
-	Negotiate fair settlement of claims, considering medical treatments, disability ratings, rehabilitation, and compensation.`,
+    description: `Evaluate and process workers' compensation claims: investigation, evidence, and medical records to figure out if the claim is valid.
+Calculate benefits from injury severity, medical evidence, and New Jersey WC law.
+Negotiate settlements covering treatment, disability ratings, rehab, and compensation.`,
     technologies: ["Word", "Excel", "Claim Center", "DMS"],
   },
   {
     year: "2016 - 2019",
     role: "Claims Service Representative",
     company: "NJPLIGA",
-    description: `Provided support services including bulk letters, data entry, and initial claims processing.
-	Spearheaded a project to create the value and belief statement of the operations department.
-	Assisted in the development of a new filing system and integration to a paperless system for W-9s.
-Provided excellent customer service over the phone to claimants and medical providers.`,
+    description: `Support work: bulk letters, data entry, and first-pass claims processing.
+Helped write the operations department value and belief statement.
+Helped move W-9s onto a paperless filing system.
+Took calls from claimants and medical providers.`,
     technologies: ["Word", "Excel", "PowerPoint"],
   },
   {
     year: "2015 - 2016",
     role: "Administrative Clerk",
     company: "Kelly Services",
-    description: `Demonstrated ability to support ICM Document Solutions project with Honeywell.
-Scanned and processed Honeywell's confidential documents into electronic format.
-Carried out all assigned administrative duties that aligned to the production schedule.`,
+    description: `Temp work on the ICM Document Solutions project with Honeywell.
+Scanned and processed confidential Honeywell documents into electronic format.
+Handled the admin work around the production schedule.`,
     technologies: [],
   },
 ];
@@ -83,9 +85,9 @@ export const PROJECTS = [
     title: "Attack Analyst — RSS threat-intel study notes",
     kind: "app",
     summary:
-      "Python RSS pipeline that turns security headlines into structured notes: what happened, how the attack worked, how to defend, and what I would hunt in a SIEM. Research only — no samples.",
+      "Python RSS pipeline that turns security headlines into notes I can search later: what happened, how it worked, how you'd defend, and what I'd hunt in a SIEM. Reading and writing only. No samples.",
     description:
-      "Personal pipeline that pulls security RSS feeds, ranks recent stories, and writes a digest plus deeper markdown writeups. Each story covers what happened, how the attack worked, defenses (patch versus compensating control), and an honest mapping to what I would look for in Wazuh or Sysmon. Research only: no malware samples, lure sites, or exploit steps.",
+      "A personal pipeline that pulls security RSS feeds, ranks the recent stories, and writes a digest plus longer markdown notes. Each writeup covers what happened, how the attack worked, defenses (patch vs something you can do if you can't patch yet), and what I'd look for in Wazuh or Sysmon when that mapping is honest. I don't download samples or lure sites for this.",
     technologies: [
       "Python",
       "RSS",
@@ -100,9 +102,9 @@ export const PROJECTS = [
     title: "ASL Web App — A tool for helping aspiring ASL learners",
     kind: "app",
     summary:
-      "Next.js study aid for hearing learners to search ASL sign videos, save study cards, and practice. Guests can search; accounts use a hashed password. Not a substitute for Deaf-led instruction.",
+      "Next.js app so I can search ASL sign videos, save study cards, and practice. Guests can search. Accounts use a hashed password. Not a replacement for Deaf-led classes.",
     description:
-      "Next.js app for hearing learners to search ASL sign videos from YouTube and Spread the Sign, watch them inline, and save study cards to an account. Search maps typos and short forms to a canonical term. Guests can search and watch; study and practice require a sign-in with a hashed password and a session cookie. Built as a study aid, not a replacement for Deaf-led instruction.",
+      "Next.js app for looking up ASL sign videos from YouTube and Spread the Sign, watching them on the page, and saving study cards to an account. Search maps typos and short forms to a normal term. Guests can search and watch; study and practice need a sign-in. I built it as a study aid, not a replacement for Deaf teachers.",
     technologies: [
       "Next.js",
       "React",
@@ -120,9 +122,9 @@ export const PROJECTS = [
     title: "SOC Monitoring and Detection Engineering with Wazuh",
     kind: "soc",
     summary:
-      "Wazuh SIEM with Sysmon on a domain controller and a Windows 11 client. Custom PowerShell-bypass rules, case-file triage, and true vs false vs benign true positives.",
+      "Wazuh SIEM with Sysmon on a domain controller and a Windows 11 client. Custom PowerShell-bypass rules, tickets for the serious alerts, and figuring out true vs false vs 'I did that on purpose'.",
     description:
-      "Built a working detection and investigation loop on top of a Wazuh SIEM, with agents and Sysmon reporting from a Windows Server 2022 domain controller and a Windows 11 workstation. Wrote custom rules 100110 and 100111 to catch PowerShell executed with an execution-policy bypass or an encoded command, escalating when it runs at High or System integrity, because the stock rule only fired on nested PowerShell. Investigated the resulting alerts as case files, triaging Event IDs 4625, 4720 and 4698 and separating true positives from false positives and benign true positives by reading the underlying fields rather than the rule description.",
+      "Got a real detection loop running on Wazuh, with agents and Sysmon from a Windows Server 2022 domain controller and a Windows 11 workstation. Wrote custom rules 100110 and 100111 for PowerShell with an execution-policy bypass or an encoded command, and a higher-severity version when it runs at High or System, because the stock rule only fired on nested PowerShell. Worked the alerts as tickets: Event IDs 4625, 4720, and 4698, and I learned to read the actual fields instead of trusting the scary rule title.",
     technologies: [
       "Wazuh",
       "Sysmon",
@@ -137,9 +139,9 @@ export const PROJECTS = [
     title: "Help Desk Ticketing with Alert-to-Ticket Automation",
     kind: "soc",
     summary:
-      "osTicket on a Raspberry Pi, then Wazuh alerts at level 12+ open tickets automatically. The install failed until a Pi-hole versus Apache port conflict was traced.",
+      "osTicket on a Raspberry Pi, then Wazuh alerts at level 12+ open tickets on their own. The install looked broken until I found Pi-hole sitting on port 80 and Apache on 8080.",
     description:
-      "Deployed osTicket on a Raspberry Pi over Apache, PHP and MariaDB to act as the queue for the lab. The install appeared broken until methodical troubleshooting traced it to a port conflict: Pi-hole already held port 80, so Apache had been pushed to 8080 and every request was reaching the wrong service. Later connected Wazuh to osTicket so that any alert at level 12 or above opens a ticket automatically, giving each serious detection a tracked path from alarm to written verdict.",
+      "Put osTicket on a Raspberry Pi with Apache, PHP, and MariaDB so the lab would have a ticket queue. The setup page would not load. I went down permissions and virtual hosts before I checked listening ports: Pi-hole already had port 80, Apache had moved to 8080, and I was hitting the wrong service. Later I connected Wazuh so anything at level 12 or above opens a ticket, so a serious alert has a place to live besides the dashboard.",
     technologies: [
       "osTicket",
       "Raspberry Pi",
@@ -156,9 +158,9 @@ export const PROJECTS = [
     title: "Active Directory Domain Lab",
     kind: "soc",
     summary:
-      "Windows Server 2022 domain controller and Windows 11 client in VirtualBox. A rejected password traced to a 14-character Group Policy I chose to meet rather than weaken.",
+      "Windows Server 2022 domain controller and Windows 11 client in VirtualBox. A rejected password turned out to be a 14-character Group Policy I decided to keep.",
     description:
-      "Built and maintain a Windows Server 2022 domain controller with a Windows 11 client in VirtualBox, used for user and system administration practice. Diagnosed a rejected password by tracing it through Group Policy Management to a 14-character minimum in the Default Domain Policy, then chose to meet the policy rather than weaken it so the lab keeps a realistic security baseline.",
+      "Windows Server 2022 domain controller and a Windows 11 client in VirtualBox, for user and system admin practice. A new user password kept getting rejected. Group Policy Management showed a 14-character minimum in the Default Domain Policy. I kept the policy and used a password that met it instead of lowering the bar.",
     technologies: [
       "Windows Server 2022",
       "Active Directory",
@@ -173,9 +175,9 @@ export const PROJECTS = [
     title: "Self-Hosted Nextcloud with Automated Backups",
     kind: "soc",
     summary:
-      "Nextcloud on Docker Compose with MariaDB, Redis, health checks, and cron backups kept as separate database, file, and configuration sets.",
+      "Nextcloud on Docker Compose with MariaDB, Redis, health checks, and cron backups split into database, files, and config so I'm not stuck with one giant archive.",
     description:
-      "Runs Nextcloud with MariaDB and Redis under Docker Compose, with database credentials moved out of the compose file into environment configuration, health checks on MariaDB, and explicit container dependency ordering so services start in the right sequence. Backups are automated on cron with error handling and verification, kept as separate database, file and configuration sets rather than one opaque archive.",
+      "Nextcloud with MariaDB and Redis under Docker Compose. Credentials live in env files, not in the compose file. MariaDB has a health check, and containers wait on each other so they start in the right order. Backups run on cron with some error handling, and I keep the database, files, and config as separate backups instead of one blob I can't restore from.",
     technologies: [
       "Docker Compose",
       "Nextcloud",

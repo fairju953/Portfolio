@@ -31,8 +31,13 @@ const Home = () => {
 
   // Hash links from /blog (and a refresh on /#projects) need an explicit
   // scroll; the browser will not always do it after the route renders.
+  // #home and a bare / should be the document top — scrollIntoView on the
+  // hero can land on About after the portrait loads and the section grows.
   useEffect(() => {
-    if (!hash) return;
+    if (!hash || hash === "#home") {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      return;
+    }
     const id = hash.slice(1);
     const node = document.getElementById(id);
     if (node) {

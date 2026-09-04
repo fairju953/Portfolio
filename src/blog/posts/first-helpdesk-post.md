@@ -4,44 +4,12 @@ date: "2026-05-05"
 tags: ["Career", "SOC", "Homelab"]
 ---
 
-## Why This Matters
+I'm a workers' compensation adjuster. I want to get into IT, and after that into cybersecurity.
 
-I’m currently working as a Workers’ Compensation Adjuster in the insurance industry, but my goal is to transition into IT and cybersecurity.
+I graduated from Kean University with a B.S. in Information Technology, and in April I passed CompTIA Security+. That covers the classroom side. What I didn't have yet was time on the tools.
 
-I graduated from Kean University with a Bachelor’s degree in Information Technology, and in April I earned my CompTIA Security+ certification. These achievements show my interest in cybersecurity and have given me a solid foundation in security concepts.
+I applied to a bunch of help desk and entry-level jobs and didn't hear back. A degree and a cert weren't enough. Places want to see that you've actually done the work.
 
-Now I'm focusing on gaining hands-on experience and building real-world skills through a home lab and personal projects.
+So I changed what I was doing. I started an Active Directory homelab to practice user and system admin in something closer to a real environment, then put SOC tools on top of it.
 
-## The Problem
-
-After applying to multiple IT Help Desk and entry-level roles, I wasn’t getting any responses.
-
-That made me realize that having a degree and certification isn’t always enough. Employers are looking for practical skills.
-
-## How I Approached It
-
-I decided to change my strategy.
-
-I started building an Active Directory home lab to simulate a real IT environment. My goal is to:
-
-- Practice user and system administration
-- Learn how enterprise environments actually function
-- Transition into security-focused work by layering SOC tools on top of my lab
-
-At the same time, I’m using this blog to document everything I do — including setups, mistakes, and troubleshooting.
-
-## What I Learned
-
-So far, I’ve learned that:
-
-- Hands-on experience is critical in IT and cybersecurity
-- Troubleshooting is one of the most important skills to develop
-- Building and documenting projects is just as valuable as completing them
-
-## Final Thoughts
-
-My goal is to become an IT Specialist/SOC Analyst, and I understand that it takes a lot of hard work.
-
-I'm committed to being a lifelong learner and to continue to challenge myself by taking on new adventures.
-
-This blog will serve as a telling of that journey.
+I'm using this blog to write down setups, mistakes, and troubleshooting. That's the plan: keep building, and write it down as I go.

@@ -22,8 +22,8 @@ const Projects = () => {
       </motion.h2>
 
       <p className="mx-auto mb-12 max-w-3xl px-4 text-center text-slate-600">
-        Home-lab SOC work next to apps I shipped. Each card links to the
-        writeup; live apps also link out.
+        Home-lab SOC work next to a couple of apps I shipped. Each card goes to
+        the writeup. Live apps have their own link.
       </p>
 
       <div className="mx-auto grid max-w-5xl gap-6 px-4 md:grid-cols-2">

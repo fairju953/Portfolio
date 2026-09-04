@@ -9,7 +9,7 @@ const NotFound = () => {
   // the only signal available to keep them out of the index.
   useSeo({
     title: `Page not found | ${SITE_NAME}`,
-    description: "That page does not exist or may have been moved.",
+    description: "That page isn't here. It may have been moved.",
     path: pathname,
     index: false,
   });
@@ -19,7 +19,7 @@ const NotFound = () => {
       <p className="text-6xl font-thin tracking-tight lg:text-8xl">404</p>
       <h1 className="mt-6 text-2xl font-semibold">Page not found</h1>
       <p className="mt-4 max-w-md text-slate-600">
-        That page does not exist or may have been moved.
+        That page isn't here. It may have been moved.
       </p>
       <div className="mt-8 flex gap-6">
         <Link

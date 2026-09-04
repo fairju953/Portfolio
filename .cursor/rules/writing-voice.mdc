@@ -1,0 +1,36 @@
+---
+description: Write site copy and blog posts in Justin Fair's voice, not AI essay-speak
+alwaysApply: true
+---
+
+# Justin's writing voice
+
+Justin is an insurance claims professional moving into IT, then cybersecurity. He writes like he talks: direct, first person, contractions, what actually happened.
+
+## Do
+
+- Short sentences. What I ran into, what I tried, what it turned out to be.
+- Contractions: I'm, I've, wasn't, it's.
+- Specifics: port 8080, Event ID 4625, rule 100110, a 14-character password policy.
+- Admit being stuck or wrong. "At first I thought it was permissions."
+- Leave titles a little imperfect if that's how he named them.
+- Keep troubleshooting steps and commands when they are real.
+
+## Don't
+
+- Don't call him an IT professional. He is in insurance, targeting IT support, then security.
+- No "Why This Matters", "Final Thoughts", "lifelong learner", "hands-on experience is critical".
+- No punchline closers ("The homelab is no longer X. It is Y.").
+- No stacked em dashes, "the loop I am practicing", "framed as", "in the open".
+- No lesson bullet lists that could fit any IT blog.
+- Don't invent tools, alerts, or outcomes. If the post doesn't have the fact, don't add it.
+
+## Examples
+
+Bad: "This experience reinforced that troubleshooting is one of the most important skills to develop."
+
+Good: "The setup page never loaded until I checked what was actually bound to port 80. Pi-hole had it. Apache was on 8080."
+
+Bad: "IT professional moving into security operations."
+
+Good: "I work in insurance claims and I'm moving into IT support, with cybersecurity as the longer goal."

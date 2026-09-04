@@ -4,27 +4,27 @@ date: "2026-09-03"
 tags: ["SOC", "Threat intelligence", "Python", "MITRE ATT&CK"]
 ---
 
-I built **Attack Analyst** so that reading cybersecurity news is the same habit as working a ticket: pull the story, write what actually happened, then say how you would defend and what you would look for in a SIEM.
+I built **Attack Analyst** because I was reading cybersecurity news and not keeping any of it. I wanted the same habit I use on a ticket: pull the story, write down what actually happened, then say how you'd defend and what you'd look for in a SIEM.
 
-It is a personal study library, not a product that runs malware. Headlines come from RSS. Each story is saved as markdown I can search later.
+It's a personal study library. It is not a product that runs malware. Headlines come from RSS. Each story gets saved as markdown I can search later.
 
 ## What it does
 
-Python scripts fetch a short window of security feeds, rank recent stories, and write a daily digest. For each item I want the same sections every time:
+Python scripts grab a short window of security feeds, rank the recent stories, and write a daily digest. For each item I try to fill in the same sections:
 
-- **What happened** — facts from the reporting, not the headline
-- **How the attack worked** — the method, in plain language, with ATT&CK IDs only when a source supports them
-- **Defense** — patch versus a compensating control if you cannot patch yet
-- **Detection angle** — what I would hunt in a lab SIEM (Wazuh, Sysmon) or on the network (Pi-hole), when that mapping is honest
+- **What happened** — what's in the reporting, not just the headline
+- **How the attack worked** — the method, in plain language. ATT&CK IDs only when a source actually supports them
+- **Defense** — patch, or something you can do if you can't patch yet
+- **Detection** — what I'd hunt in the lab SIEM (Wazuh, Sysmon) or on the network (Pi-hole), and only when that mapping is honest
 
-Stories that deserve more than a digest become a full writeup in the same folder. Follow-ups update the file in place instead of leaving stale copies around.
+Stories that need more than a digest get a full writeup in the same folder. If a story gets a follow-up, I update that file instead of leaving old copies around.
 
-## Why it sits next to the home lab
+## Why it sits next to the homelab
 
-The SOC loop in my lab is alert → ticket → hunt → verdict. Attack Analyst is the same muscle on public reporting: do not trust the scary title, check the source, and write a conclusion you can defend. When a technique in a story matches something I already log (PowerShell, file drops, failed logons, scheduled tasks), I can say so. When it does not, I say that too.
+In the lab the loop is alert → ticket → hunt → verdict. Attack Analyst is the same thing on public reporting: don't trust the scary title, check the source, write a conclusion. If a technique in a story matches something I already log (PowerShell, file drops, failed logons, scheduled tasks), I say so. If it doesn't, I say that too.
 
-I do not download lure sites or samples into this project. Reading a vendor advisory is enough for the note.
+I don't download lure sites or samples for this. A vendor advisory is enough for the note.
 
 ## Stack
 
-Python for fetch, ranking, digest generation, and optional email of the markdown report. Feed lists live in config, not in the scripts. SMTP credentials stay in a local env file that is not committed.
+Python for fetch, ranking, digest generation, and optional email of the markdown report. Feed lists live in config, not in the scripts. SMTP credentials stay in a local env file that isn't committed.

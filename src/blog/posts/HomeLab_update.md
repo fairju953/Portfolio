@@ -4,49 +4,47 @@ date: "2026-06-08"
 tags: ["Homelab", "Wazuh", "Sysmon", "Active Directory", "osTicket"]
 ---
 
-It's been a little while since my last post, but I've been busy making some major upgrades to my homelab.
+It's been a little while since the last post. I've been making some bigger changes to the homelab.
 
-Over the past week, I've shifted my focus from basic infrastructure and troubleshooting to building out a small Security Operations Center (SOC) environment. The goal is to gain more hands-on experience with security monitoring, incident response, and system administration in a controlled lab setting.
+I moved past basic setup and started building a small SOC-style environment: monitoring, a place for incidents to land, and more Windows and Linux admin in a lab I control.
 
-## Wazuh Deployment
+## Wazuh
 
-One of the biggest projects was getting Wazuh installed and running on an Ubuntu Server. The installation process had a few bumps along the way, including troubleshooting service startup issues and resource limitations in a virtual machine.
+Biggest piece was getting Wazuh onto an Ubuntu server. The install had some bumps: services that wouldn't start, and the VM running out of resources.
 
-After some trial and error, I decided to move toward running Wazuh on dedicated hardware instead of a VM. This provided better performance and a more stable environment for future expansion.
+After enough trial and error I moved Wazuh onto dedicated hardware instead of a VM. It runs better there and I have more room to add to it.
 
-## Monitoring Windows Systems
+## Watching the Windows boxes
 
-With Wazuh operational, I began deploying agents throughout the lab.
+With Wazuh up I started putting agents on the lab machines. So far:
 
-So far, I have successfully connected:
+- Windows Server 2022 domain controller
+- Windows 11 client
 
-- Windows Server 2022 Domain Controller
-- Windows 11 Client
+Both are reporting into the Wazuh dashboard.
 
-Once the agents were online, I verified that both systems were actively reporting to the Wazuh dashboard.
+## Sysmon
 
-## Sysmon Integration
+Next I deployed Sysmon so I could see more of what Windows is doing.
 
-The next step was deploying Sysmon to improve visibility into Windows activity.
+Once it was talking to Wazuh I could look at process creation and other endpoint activity from the dashboard. I'm still learning how to read it, but that's the point of the lab.
 
-After configuring Sysmon and connecting it to Wazuh, I was able to start viewing process creation events and endpoint telemetry directly from the dashboard. Learning how to navigate and interpret the data has been a valuable experience and has helped me better understand how security analysts investigate activity on endpoints.
+## osTicket
 
-## osTicket Progress
+I also kept going on osTicket on the Raspberry Pi.
 
-I also continued working on my osTicket deployment running on a Raspberry Pi.
+That started with install problems: config files and missing PHP extensions. After those were fixed I finished the install and started thinking about how tickets fit with Wazuh, not just as a help desk app sitting by itself.
 
-This project started with basic installation troubleshooting, including configuration file issues and missing PHP extensions. After resolving those problems, I completed the installation and began planning how osTicket can fit into the larger SOC workflow.
+Next I want email notifications, and then alerts that create tickets so I can follow something from detection through to a written answer.
 
-My next goal is to configure email notifications and eventually connect security alerts to ticket creation so incidents can be tracked from detection through resolution.
+## What's next
 
-## What's Next?
+Over the next few weeks I want to:
 
-Over the next few weeks, I plan to:
+- Put Wazuh agents on more systems
+- Monitor the Raspberry Pi and my laptop
+- Set up email in osTicket
+- Write detection rules and alerting
+- Add a Kali VM so I can generate test events without guessing
 
-- Deploy Wazuh agents to additional systems
-- Monitor my Raspberry Pi and personal laptop
-- Configure email notifications in osTicket
-- Build detection rules and alerting workflows
-- Add a Kali Linux VM to safely generate test events and improve my detection capabilities
-
-This project has already taught me a lot about Windows administration, Linux troubleshooting, security monitoring, and incident management. I'm looking forward to continuing to expand the lab and documenting what I learn along the way.
+More as I get there.

@@ -4,26 +4,28 @@ date: "2026-09-03"
 tags: ["React", "Next.js", "Web", "ASL"]
 ---
 
-**ASL Learn** is a web app I built so hearing learners can look up American Sign Language videos quickly. Search a word, watch a clip, save it to a study card, and practice later. It is a **study aid**, not a class and not a substitute for Deaf teachers and community.
+**ASL Learn** is a web app I built so I (and other hearing learners) can look up American Sign Language videos without digging through a bunch of tabs. Search a word, watch a clip, save it to a study card, practice later.
+
+It is a study aid. It is not a class, and it is not a substitute for Deaf teachers and community.
 
 Live: [asl.jbtechbyte.com](https://asl.jbtechbyte.com)
 
 ## What you can do
 
-- Search from the home page. Results come from YouTube and Spread the Sign, with inline playback.
+- Search from the home page. Results come from YouTube and Spread the Sign, and you can watch them on the page.
 - Open category hubs and an alphabet practice view.
-- Create an account (email and password). Study cards and practice are stored per account. Guests can still search and watch.
-- Read a short about page on ASL and Deaf culture, plus links to community resources.
-- Send feedback through a contact form.
+- Create an account (email and password). Study cards and practice are per account. Guests can still search and watch.
+- There's a short about page on ASL and Deaf culture, plus links to community resources.
+- There's a contact form for feedback.
 
-Search is not a raw string match. Common typos and short forms (for example `hi` for hello) map to a canonical term so the results look more like a dictionary than a keyword dump. Trusted dictionary-style channels are ranked above random vlogs when that data is available.
+Search isn't a raw string match. Common typos and short forms (for example `hi` for hello) map to a normal term so it behaves more like a dictionary. When I have that data, trusted dictionary-style channels rank above random vlogs.
 
-## How it is built
+## How it's built
 
-The frontend is **Next.js**, **React**, and **Tailwind**. Accounts use a hashed password and a session cookie, not a token sitting in the browser. Local development uses SQLite through Prisma. Production can use Turso when those environment variables are set, so signups survive a serverless filesystem.
+Frontend is **Next.js**, **React**, and **Tailwind**. Accounts use a hashed password and a session cookie, not a token sitting in the browser. Locally it uses SQLite through Prisma. Production can use Turso when those env vars are set, so signups survive a serverless filesystem.
 
-API keys for video search stay in the host environment. They are not in the repo.
+API keys for video search stay on the host. They aren't in the repo.
 
-## What I am careful about
+## What I'm careful about
 
-ASL is a full language. A short clip cannot show every regional variation or conversational use. The about page says that on purpose. If you are learning, look for Deaf-led classes and practice with people who grew up with the language.
+ASL is a full language. A short clip can't show every regional variation or how people actually talk. The about page says that on purpose. If you're learning, look for Deaf-led classes and practice with people who grew up with the language.

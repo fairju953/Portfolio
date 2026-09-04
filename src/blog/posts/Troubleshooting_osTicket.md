@@ -4,88 +4,41 @@ date: "2026-05-12"
 tags: ["Linux", "Apache", "Networking", "Homelab", "osTicket"]
 ---
 
-## Why This Matters
+I was putting osTicket on my Raspberry Pi for the help desk / SOC side of the lab. I figured it would be a straightforward install. It was not. I ended up in Apache, Linux networking, and a port conflict.
 
-While building my homelab, I’ve learned that troubleshooting is where the real learning happens. Recently, I worked on setting up osTicket on my Raspberry Pi as part of my Help Desk and SOC homelab environment.
+## What I saw
 
-What seemed like a simple installation turned into a troubleshooting exercise involving Apache, Linux networking, and port conflicts.
-
-## The Problem
-
-After installing osTicket, Apache, PHP, and MariaDB, I expected the setup page to load normally.
-
-Instead, I kept receiving:
+After installing osTicket, Apache, PHP, and MariaDB, I expected the setup page. I kept getting:
 
 - 404 errors
-- Access denied errors
+- Access denied
 - The default Apache page
 
-I initially thought the issue was related to:
+I assumed it was one of:
 
 - file permissions
 - Apache virtual hosts
 - missing osTicket files
-- incorrect DocumentRoot settings
+- a bad DocumentRoot
 
-Even though the osTicket files existed correctly in `/var/www/html/osticket`, the site still would not load.
+The files were sitting in `/var/www/html/osticket` the whole time. The site still wouldn't load.
 
-## Troubleshooting
+## What actually fixed it
 
-I began checking:
-
-- Apache configurations
-- virtual hosts
-- file permissions
-- Apache logs
-- osTicket file structure
-
-One of the most useful commands was:
-
-```bash
-sudo apache2ctl -S
-```
-
-The major breakthrough came when I checked which services were using port 80:
+I checked Apache configs, virtual hosts, permissions, logs, and the osTicket folder. `sudo apache2ctl -S` helped. The thing that broke it open was this:
 
 ```bash
 sudo ss -tulpn | grep :80
 ```
 
-This revealed that:
+Pi-hole was already on port 80. Apache was listening on 8080.
 
-- Pi-hole was already using port 80
-- Apache was actually running on port 8080
-
-Because of this, requests to:
-
-```text
-http://RASPBERRY_PI_IP/
-```
-
-were going to Pi-hole instead of Apache.
-
-The correct URL was:
+So `http://RASPBERRY_PI_IP/` was Pi-hole, not Apache. The URL I needed was:
 
 ```text
 http://RASPBERRY_PI_IP:8080/osticket
 ```
 
-Once I used the correct port, osTicket loaded successfully.
+Once I used the right port, osTicket loaded.
 
-## What I Learned
-
-This troubleshooting process reinforced several important IT concepts:
-
-- Port conflicts between services
-- Apache troubleshooting
-- Linux networking fundamentals
-- Service binding and listening ports
-- Reading logs and validating configurations
-
-Most importantly, I learned how important it is to troubleshoot methodically instead of guessing.
-
-## Final Thoughts
-
-Although this issue took longer than expected to solve, I learned much more from troubleshooting the problem than I would have from a perfect installation on the first try.
-
-I’m continuing to build out my homelab with Active Directory, Linux systems, osTicket, and future SOC monitoring tools while documenting everything I learn along the way.
+I spent longer on this than I wanted, but I learned more from chasing it than I would have from a clean install. Next time I'm going to check what's bound to the port before I rebuild the whole config.

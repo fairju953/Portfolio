@@ -4,51 +4,27 @@ date: "2026-05-06"
 tags: ["Homelab", "Active Directory", "Group Policy"]
 ---
 
-After taking some time away from my Active Directory homelab, I decided to get back into it and re-familiarize myself with the environment.
+I took some time away from the Active Directory homelab and had to get my bearings again.
 
-My lab consists of a Windows Server (Domain Controller) and a Windows 11 client running in VirtualBox.
+The lab is a Windows Server domain controller and a Windows 11 client in VirtualBox. First day back I poked around and tried to create a new user, just to remember how the environment was set up.
 
-On my first day back, I spent time exploring the environment and creating a new user account to refresh my understanding.
+## The issue
 
-## The Issue
+The password I entered would not go through.
 
-While creating a new user, I ran into a password error. The system would not accept the password I entered.
+I couldn't remember what password policy I had set on the domain, so I went looking.
 
-At first, I wasn’t sure why this was happening. I realized I couldn’t remember the password policies I had previously configured in my domain.
+## What I checked
 
-## Troubleshooting
+I opened Group Policy Management and looked at the Default Domain Policy:
 
-To investigate the issue, I checked the domain’s password policy using Group Policy Management.
+1. Group Policy Management Console
+2. Forest → Domains → yourdomain.local → Default Domain Policy
+3. Right-click Default Domain Policy → Edit
+4. Computer Configuration → Policies → Windows Settings → Security Settings → Account Policies → Password Policy
 
-## Steps
+Minimum password length was 14 characters. That was the whole problem.
 
-1. Open Group Policy Management Console
-2. Navigate to: Forest → Domains → yourdomain.local → Default Domain Policy
-3. Right-click Default Domain Policy → Click Edit
-4. Go to: Computer Configuration → Policies → Windows Settings → Security Settings → Account Policies → Password Policy
+I left the policy alone. I'd rather keep the lab closer to a real standard than make it easier on myself. I used a password that met the length and complexity rules, and the account created fine.
 
-Here, I was able to review the password requirements that were being enforced.
-
-## Resolution
-
-After reviewing the password policy, I discovered that the minimum password length was set to 14 characters.
-
-Instead of lowering the requirement, I decided to keep the policy unchanged to maintain a more realistic security standard within my lab.
-
-To resolve the issue, I updated the password I was using to meet the domain’s complexity and length requirements. Once I used a compliant password, I was able to successfully create the user account.
-
-## What I Learned
-
-This experience reinforced a few important concepts:
-
-- Group Policy controls critical security settings in Active Directory
-- Password policies can directly impact user management tasks
-- When returning to a system after a break, it’s important to re-check configurations
-
-## Final Thoughts
-
-Getting back into my homelab helped me quickly rebuild context and confidence working with Active Directory.
-
-This was a simple issue, but it reminded me how important it is to understand and verify system configurations when troubleshooting.
-
-Moving forward, I plan to continue building on this lab and documenting everything I learn along the way.
+Simple issue, but it was a reminder that if I've been away from a system I should check what I actually configured before I assume it's broken.
