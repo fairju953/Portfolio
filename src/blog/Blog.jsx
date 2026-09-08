@@ -29,7 +29,7 @@ const Blog = () => {
     <div className="text-slate-900">
       <h1 className="mb-4 text-4xl font-bold">Blog</h1>
       <p className="mb-8 max-w-2xl text-slate-600">
-        Notes from the homelab, including the parts that didn't work the first
+        Notes from the homelab, including the parts that didn&apos;t work the first
         time.
       </p>
 
